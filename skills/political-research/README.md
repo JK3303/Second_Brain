@@ -1,6 +1,6 @@
-# Colorado Politics Research Skill
+# Political Research Skill
 
-A reusable skill pack that turns Claude into a Colorado political research assistant. Give it a candidate name, a district number, or a question about a race — and it knows how to query your Open Brain data, structure its answer, and offer to save findings back to memory.
+A reusable skill pack that turns Claude into a political research assistant for any US state or jurisdiction. Give it a candidate name, a district number, or a question about a race — and it knows how to query your Open Brain data, structure its answer, and offer to save findings back to memory.
 
 ## What it does
 
@@ -15,8 +15,8 @@ Provides Claude with structured instructions for:
 ## Prerequisites
 
 - Working Open Brain setup (Supabase + pgvector + MCP connected)
-- [Colorado Politics Schema](../../schemas/colorado-politics/) applied to your database
-- [Colorado Politics Import](../../recipes/colorado-politics-import/) recipe run at least once to populate data
+- [Political Research Schema](../../schemas/political-research/) applied to your database
+- [Political Data Import](../../recipes/political-data-import/) recipe run at least once to populate data
 
 ## Installation
 
@@ -26,7 +26,7 @@ Provides Claude with structured instructions for:
 
 Copy `SKILL.md` into your AI client's skills directory:
 
-- **Claude Code:** Place in `.claude/skills/colorado-politics-research.md` at your project root, or in `~/.claude/skills/` for global access
+- **Claude Code:** Place in `.claude/skills/political-research.md` at your project root, or in `~/.claude/skills/` for global access
 - **Cursor:** Add the contents to your `.cursorrules` or system prompt
 - **Claude Desktop:** Paste the contents into a Project instruction
 
@@ -36,9 +36,9 @@ Copy `SKILL.md` into your AI client's skills directory:
 
 Ask Claude:
 ```
-How many Colorado districts are in my database?
+How many political districts are in my database?
 ```
-It should query `co_districts` and return a count. If it returns zero, run the import recipe first.
+It should query `pol_districts` and return a count. If it returns zero, run the import recipe first.
 
 ✅ **Done when:** Claude returns a non-zero district count.
 
@@ -46,7 +46,7 @@ It should query `co_districts` and return a count. If it returns zero, run the i
 
 Try a sample research prompt:
 ```
-Research Colorado's 2nd Congressional District — who are the current candidates,
+Research the 2nd Congressional District — who are the current candidates,
 what's the partisan lean, and what do the demographics look like?
 ```
 
@@ -55,11 +55,11 @@ what's the partisan lean, and what do the demographics look like?
 ## Trigger Conditions
 
 This skill activates when you:
-- Ask about a specific Colorado candidate ("tell me about [name]")
-- Ask about a district ("who's running in HD-18?")
+- Ask about a specific candidate or elected official
+- Ask about a political district ("who's running in HD-18?")
 - Ask to compare candidates ("compare the candidates in CD-8")
 - Ask about campaign finance ("who's out-raising whom in SD-22?")
-- Ask which Colorado races are competitive or worth watching
+- Ask which races are competitive or worth watching
 - Say "research [candidate or district]"
 
 ## Expected Outcome
@@ -72,7 +72,7 @@ Claude responds with structured, sourced summaries for candidates and districts 
 Make sure your Open Brain MCP server is connected and Claude has tool access. In Claude Desktop, check Settings → Connectors.
 
 **Candidate or district not found**
-The data tables may be empty or partially populated. Run `seed_districts.py` and at least one import script from the [Colorado Politics Import](../../recipes/colorado-politics-import/) recipe.
+The data tables may be empty or partially populated. Run `seed_districts.py` and at least one import script from the [Political Data Import](../../recipes/political-data-import/) recipe.
 
 **Demographic data shows as null**
 Run `import_census_demographics.py` from the import recipe. This is a separate step from seeding districts.

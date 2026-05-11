@@ -1,0 +1,20 @@
+{
+  "name": "Political Research",
+  "description": "Skill pack for researching political districts and candidates in any US state — lookup, comparison, district analysis, campaign finance, and competitive race identification — using Open Brain memory and structured political data tables.",
+  "category": "skills",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [],
+    "tools": []
+  },
+  "tags": ["politics", "candidates", "districts", "elections", "campaign-finance", "research", "civic"],
+  "difficulty": "beginner",
+  "estimated_time": "5 minutes",
+  "created": "2026-05-11",
+  "updated": "2026-05-11"
+}

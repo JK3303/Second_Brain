@@ -1,16 +1,23 @@
 """
 import_ballotpedia.py
 ---------------------
-Fetches Colorado candidate data from Ballotpedia's public API
-and upserts it into co_candidates, linking to co_districts.
+Fetches candidate data from Ballotpedia's public API for a target state
+and upserts it into pol_candidates, linking to pol_districts.
 
 Ballotpedia API docs: https://ballotpedia.org/API-documentation
 Free tier: 500 requests/day. Register at https://ballotpedia.org/API-documentation
+
+Environment variables:
+    STATE_NAME   — Full state name to query (default: Colorado)
+    OFFICE_TYPES — Comma-separated list of office types to fetch
+                   (default: U.S. House,State Senate,State House,Governor,
+                    Attorney General,Secretary of State,State Treasurer)
 
 Usage:
     SUPABASE_URL=https://xxx.supabase.co \
     SUPABASE_SERVICE_KEY=your-service-role-key \
     BALLOTPEDIA_API_KEY=your-key \
+    STATE_NAME=Texas \
     python import_ballotpedia.py
 
 Requirements:
@@ -36,20 +43,20 @@ for var in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "BALLOTPEDIA_API_KEY"):
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
+STATE_NAME = os.environ.get("STATE_NAME", "Colorado")
+
+_DEFAULT_OFFICE_TYPES = (
+    "U.S. House,State Senate,State House,Governor,"
+    "Attorney General,Secretary of State,State Treasurer"
+)
+OFFICE_QUERIES = [
+    {"office_type": t.strip(), "state": STATE_NAME}
+    for t in os.environ.get("OFFICE_TYPES", _DEFAULT_OFFICE_TYPES).split(",")
+    if t.strip()
+]
+
 BALLOTPEDIA_BASE = "https://api.ballotpedia.org/v1"
 HEADERS = {"x-api-key": BALLOTPEDIA_API_KEY, "Content-Type": "application/json"}
-
-# Ballotpedia office IDs for Colorado offices.
-# Find the full list at: https://ballotpedia.org/API-documentation#Office_IDs
-COLORADO_OFFICE_QUERIES = [
-    {"office_type": "U.S. House",             "state": "Colorado"},
-    {"office_type": "State Senate",           "state": "Colorado"},
-    {"office_type": "State House",            "state": "Colorado"},
-    {"office_type": "Governor",               "state": "Colorado"},
-    {"office_type": "Attorney General",       "state": "Colorado"},
-    {"office_type": "Secretary of State",     "state": "Colorado"},
-    {"office_type": "State Treasurer",        "state": "Colorado"},
-]
 
 PARTY_NORMALIZE = {
     "democratic party": "Democrat",
@@ -71,7 +78,7 @@ def normalize_party(raw: str) -> str:
 
 def get_district_id_by_name(district_name: str) -> str | None:
     result = (
-        supabase.table("co_districts")
+        supabase.table("pol_districts")
         .select("id")
         .ilike("name", f"%{district_name}%")
         .limit(1)
@@ -81,7 +88,7 @@ def get_district_id_by_name(district_name: str) -> str | None:
 
 
 def fetch_candidates(office_type: str, state: str) -> list[dict]:
-    """Query Ballotpedia for active candidates for a given office type in Colorado."""
+    """Query Ballotpedia for active candidates for a given office type and state."""
     url = f"{BALLOTPEDIA_BASE}/candidates"
     params = {
         "office_type": office_type,
@@ -111,7 +118,6 @@ def upsert_candidate(candidate: dict) -> None:
 
     district_id = get_district_id_by_name(district_raw) if district_raw else None
 
-    # Build social media dict from available fields
     social = {}
     for field in ("twitter", "facebook", "instagram", "youtube"):
         val = candidate.get(field)
@@ -131,9 +137,8 @@ def upsert_candidate(candidate: dict) -> None:
         "sources":          [{"name": "Ballotpedia", "url": candidate.get("url", "")}],
     }
 
-    # Upsert on name + office
     existing = (
-        supabase.table("co_candidates")
+        supabase.table("pol_candidates")
         .select("id")
         .eq("full_name", full_name)
         .eq("office", office)
@@ -141,15 +146,15 @@ def upsert_candidate(candidate: dict) -> None:
         .execute()
     )
     if existing.data:
-        supabase.table("co_candidates").update(row).eq("id", existing.data[0]["id"]).execute()
+        supabase.table("pol_candidates").update(row).eq("id", existing.data[0]["id"]).execute()
     else:
-        supabase.table("co_candidates").insert(row).execute()
+        supabase.table("pol_candidates").insert(row).execute()
 
 
 def main() -> None:
-    print("Importing Colorado candidates from Ballotpedia...")
+    print(f"Importing {STATE_NAME} candidates from Ballotpedia...")
     total = 0
-    for query in COLORADO_OFFICE_QUERIES:
+    for query in OFFICE_QUERIES:
         print(f"  → {query['office_type']}")
         candidates = fetch_candidates(query["office_type"], query["state"])
         for c in candidates:

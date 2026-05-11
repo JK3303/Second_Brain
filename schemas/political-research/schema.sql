@@ -1,13 +1,14 @@
 -- ============================================================
--- Colorado Politics Schema for Open Brain
+-- Political Research Schema for Open Brain
 -- Adds structured tables for districts, candidates,
 -- election results, campaign finance, and research notes.
+-- Works with any US state or jurisdiction.
 -- ============================================================
 
 -- ------------------------------------------------------------
 -- Districts
 -- ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.co_districts (
+CREATE TABLE IF NOT EXISTS public.pol_districts (
   id              UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   name            TEXT        NOT NULL,
   type            TEXT        NOT NULL CHECK (type IN (
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS public.co_districts (
 -- ------------------------------------------------------------
 -- Candidates
 -- ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.co_candidates (
+CREATE TABLE IF NOT EXISTS public.pol_candidates (
   id               UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   full_name        TEXT        NOT NULL,
   party            TEXT        CHECK (party IN (
@@ -38,7 +39,7 @@ CREATE TABLE IF NOT EXISTS public.co_candidates (
                                  'Libertarian', 'Green', 'Other', 'Nonpartisan'
                                )),
   office           TEXT        NOT NULL,
-  district_id      UUID        REFERENCES public.co_districts(id),
+  district_id      UUID        REFERENCES public.pol_districts(id),
   bio              TEXT,
   positions        JSONB       DEFAULT '{}',
   contact_info     JSONB       DEFAULT '{}',
@@ -54,10 +55,10 @@ CREATE TABLE IF NOT EXISTS public.co_candidates (
 -- ------------------------------------------------------------
 -- Election Results
 -- ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.co_election_results (
+CREATE TABLE IF NOT EXISTS public.pol_election_results (
   id               UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
-  district_id      UUID        REFERENCES public.co_districts(id),
-  candidate_id     UUID        REFERENCES public.co_candidates(id),
+  district_id      UUID        REFERENCES public.pol_districts(id),
+  candidate_id     UUID        REFERENCES public.pol_candidates(id),
   election_year    INTEGER     NOT NULL,
   election_type    TEXT        NOT NULL CHECK (election_type IN (
                                  'primary', 'general', 'special', 'runoff'
@@ -73,9 +74,9 @@ CREATE TABLE IF NOT EXISTS public.co_election_results (
 -- ------------------------------------------------------------
 -- Campaign Finance
 -- ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.co_campaign_finance (
+CREATE TABLE IF NOT EXISTS public.pol_campaign_finance (
   id            UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
-  candidate_id  UUID        REFERENCES public.co_candidates(id),
+  candidate_id  UUID        REFERENCES public.pol_candidates(id),
   cycle_year    INTEGER     NOT NULL,
   total_raised  NUMERIC(14,2),
   total_spent   NUMERIC(14,2),
@@ -90,14 +91,14 @@ CREATE TABLE IF NOT EXISTS public.co_campaign_finance (
 -- ------------------------------------------------------------
 -- Research Notes — links Open Brain thoughts to political entities
 -- ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.co_research_notes (
+CREATE TABLE IF NOT EXISTS public.pol_research_notes (
   id           UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   thought_id   UUID        REFERENCES public.thoughts(id) ON DELETE CASCADE,
   subject_type TEXT        NOT NULL CHECK (subject_type IN (
                              'candidate', 'district', 'election', 'policy', 'general'
                            )),
-  candidate_id UUID        REFERENCES public.co_candidates(id),
-  district_id  UUID        REFERENCES public.co_districts(id),
+  candidate_id UUID        REFERENCES public.pol_candidates(id),
+  district_id  UUID        REFERENCES public.pol_districts(id),
   tags         TEXT[]      DEFAULT '{}',
   created_at   TIMESTAMPTZ DEFAULT NOW()
 );
@@ -105,20 +106,20 @@ CREATE TABLE IF NOT EXISTS public.co_research_notes (
 -- ------------------------------------------------------------
 -- Indexes
 -- ------------------------------------------------------------
-CREATE INDEX IF NOT EXISTS idx_co_candidates_district    ON public.co_candidates(district_id);
-CREATE INDEX IF NOT EXISTS idx_co_candidates_party       ON public.co_candidates(party);
-CREATE INDEX IF NOT EXISTS idx_co_candidates_active      ON public.co_candidates(active);
-CREATE INDEX IF NOT EXISTS idx_co_election_results_year  ON public.co_election_results(election_year);
-CREATE INDEX IF NOT EXISTS idx_co_election_results_cand  ON public.co_election_results(candidate_id);
-CREATE INDEX IF NOT EXISTS idx_co_finance_candidate      ON public.co_campaign_finance(candidate_id);
-CREATE INDEX IF NOT EXISTS idx_co_research_thought       ON public.co_research_notes(thought_id);
-CREATE INDEX IF NOT EXISTS idx_co_research_candidate     ON public.co_research_notes(candidate_id);
+CREATE INDEX IF NOT EXISTS idx_pol_candidates_district    ON public.pol_candidates(district_id);
+CREATE INDEX IF NOT EXISTS idx_pol_candidates_party       ON public.pol_candidates(party);
+CREATE INDEX IF NOT EXISTS idx_pol_candidates_active      ON public.pol_candidates(active);
+CREATE INDEX IF NOT EXISTS idx_pol_election_results_year  ON public.pol_election_results(election_year);
+CREATE INDEX IF NOT EXISTS idx_pol_election_results_cand  ON public.pol_election_results(candidate_id);
+CREATE INDEX IF NOT EXISTS idx_pol_finance_candidate      ON public.pol_campaign_finance(candidate_id);
+CREATE INDEX IF NOT EXISTS idx_pol_research_thought       ON public.pol_research_notes(thought_id);
+CREATE INDEX IF NOT EXISTS idx_pol_research_candidate     ON public.pol_research_notes(candidate_id);
 
 -- ------------------------------------------------------------
 -- Permissions — required on new Supabase projects
 -- ------------------------------------------------------------
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.co_districts         TO service_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.co_candidates        TO service_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.co_election_results  TO service_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.co_campaign_finance  TO service_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.co_research_notes    TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.pol_districts         TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.pol_candidates        TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.pol_election_results  TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.pol_campaign_finance  TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.pol_research_notes    TO service_role;

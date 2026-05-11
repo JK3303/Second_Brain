@@ -1,21 +1,27 @@
 """
 import_opensecrets.py
 --------------------
-Fetches Colorado campaign finance data from OpenSecrets API
-and writes it into co_campaign_finance, matched to co_candidates.
+Fetches campaign finance data from OpenSecrets API for a target state
+and writes it into pol_campaign_finance, matched to pol_candidates.
 
 OpenSecrets API docs: https://www.opensecrets.org/api/
 Free API key: https://www.opensecrets.org/api/admin/index.php?function=signup
 Rate limit: 200 calls/day on free tier.
 
 This script targets:
-  - /candSummary — Fundraising totals for a candidate/cycle
-  - /candContrib — Top contributors per candidate
+  - /getLegislators — All current legislators for a state
+  - /candSummary    — Fundraising totals for a candidate/cycle
+  - /candContrib    — Top contributors per candidate
+
+Environment variables:
+    STATE_ABBR   — Two-letter state abbreviation for OpenSecrets (default: CO)
+    CYCLE_YEAR   — Election cycle year (default: 2024)
 
 Usage:
     SUPABASE_URL=https://xxx.supabase.co \
     SUPABASE_SERVICE_KEY=your-service-role-key \
     OPENSECRETS_API_KEY=your-key \
+    STATE_ABBR=TX \
     CYCLE_YEAR=2024 \
     python import_opensecrets.py
 
@@ -36,6 +42,7 @@ SUPABASE_URL         = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 OPENSECRETS_API_KEY  = os.environ.get("OPENSECRETS_API_KEY")
 CYCLE_YEAR           = os.environ.get("CYCLE_YEAR", "2024")
+STATE_ABBR           = os.environ.get("STATE_ABBR", "CO")
 
 for var in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "OPENSECRETS_API_KEY"):
     if not os.environ.get(var):
@@ -44,8 +51,6 @@ for var in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "OPENSECRETS_API_KEY"):
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 OPENSECRETS_BASE = "https://www.opensecrets.org/api"
-# Colorado state abbreviation for OpenSecrets
-CO_STATE = "CO"
 
 
 def fetch_legislators(state: str, cycle: str) -> list[dict]:
@@ -116,7 +121,7 @@ def fetch_top_contributors(cid: str, cycle: str) -> list[dict]:
                 "name":  c.get("@attributes", {}).get("org_name"),
                 "total": c.get("@attributes", {}).get("total"),
             }
-            for c in contributors[:10]  # top 10
+            for c in contributors[:10]
         ]
     except requests.RequestException as e:
         print(f"  WARNING: candContrib failed for {cid} — {e}")
@@ -124,10 +129,9 @@ def fetch_top_contributors(cid: str, cycle: str) -> list[dict]:
 
 
 def match_candidate_in_db(full_name: str) -> str | None:
-    """Try to find a matching candidate in co_candidates by name."""
-    # Try exact match first
+    """Try to find a matching candidate in pol_candidates by name."""
     result = (
-        supabase.table("co_candidates")
+        supabase.table("pol_candidates")
         .select("id")
         .ilike("full_name", full_name)
         .limit(1)
@@ -136,10 +140,9 @@ def match_candidate_in_db(full_name: str) -> str | None:
     if result.data:
         return result.data[0]["id"]
 
-    # Try last-name match
     last_name = full_name.split(",")[0].strip() if "," in full_name else full_name.split()[-1]
     result = (
-        supabase.table("co_candidates")
+        supabase.table("pol_candidates")
         .select("id")
         .ilike("full_name", f"%{last_name}%")
         .limit(1)
@@ -149,8 +152,8 @@ def match_candidate_in_db(full_name: str) -> str | None:
 
 
 def main() -> None:
-    print(f"Importing Colorado campaign finance from OpenSecrets (cycle {CYCLE_YEAR})...")
-    legislators = fetch_legislators(CO_STATE, CYCLE_YEAR)
+    print(f"Importing {STATE_ABBR} campaign finance from OpenSecrets (cycle {CYCLE_YEAR})...")
+    legislators = fetch_legislators(STATE_ABBR, CYCLE_YEAR)
     print(f"  Found {len(legislators)} legislators from OpenSecrets.")
 
     inserted = 0
@@ -163,11 +166,11 @@ def main() -> None:
 
         candidate_id = match_candidate_in_db(firstlast)
         if not candidate_id:
-            print(f"  SKIP: {firstlast} not found in co_candidates — run import_ballotpedia.py first.")
+            print(f"  SKIP: {firstlast} not found in pol_candidates — run import_ballotpedia.py first.")
             continue
 
         print(f"  → {firstlast} ({cid})")
-        summary     = fetch_cand_summary(cid, CYCLE_YEAR)
+        summary      = fetch_cand_summary(cid, CYCLE_YEAR)
         contributors = fetch_top_contributors(cid, CYCLE_YEAR)
 
         def to_float(val: str | None) -> float | None:
@@ -177,19 +180,18 @@ def main() -> None:
                 return None
 
         row = {
-            "candidate_id":  candidate_id,
-            "cycle_year":    int(CYCLE_YEAR),
-            "total_raised":  to_float(summary.get("total")),
-            "total_spent":   to_float(summary.get("spent")),
-            "cash_on_hand":  to_float(summary.get("cash_on_hand")),
-            "top_donors":    contributors,
-            "source":        "OpenSecrets",
-            "source_url":    f"https://www.opensecrets.org/members-of-congress/summary?cid={cid}&cycle={CYCLE_YEAR}",
+            "candidate_id": candidate_id,
+            "cycle_year":   int(CYCLE_YEAR),
+            "total_raised": to_float(summary.get("total")),
+            "total_spent":  to_float(summary.get("spent")),
+            "cash_on_hand": to_float(summary.get("cash_on_hand")),
+            "top_donors":   contributors,
+            "source":       "OpenSecrets",
+            "source_url":   f"https://www.opensecrets.org/members-of-congress/summary?cid={cid}&cycle={CYCLE_YEAR}",
         }
 
-        # Upsert on candidate + cycle
         existing = (
-            supabase.table("co_campaign_finance")
+            supabase.table("pol_campaign_finance")
             .select("id")
             .eq("candidate_id", candidate_id)
             .eq("cycle_year", int(CYCLE_YEAR))
@@ -197,9 +199,9 @@ def main() -> None:
             .execute()
         )
         if existing.data:
-            supabase.table("co_campaign_finance").update(row).eq("id", existing.data[0]["id"]).execute()
+            supabase.table("pol_campaign_finance").update(row).eq("id", existing.data[0]["id"]).execute()
         else:
-            supabase.table("co_campaign_finance").insert(row).execute()
+            supabase.table("pol_campaign_finance").insert(row).execute()
 
         inserted += 1
         time.sleep(0.3)  # Respect rate limits

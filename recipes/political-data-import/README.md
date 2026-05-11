@@ -1,6 +1,8 @@
-# Colorado Politics Import
+# Political Data Import
 
-A set of Python import scripts that populate your Open Brain database with Colorado political data from four public sources: the Colorado Secretary of State, Ballotpedia, OpenSecrets, and the US Census Bureau. Run them in order and your structured tables will be ready for the [Colorado Politics Research skill](../../skills/colorado-politics-research/).
+A set of Python import scripts that populate your Open Brain database with political data from public sources: your state's Secretary of State, Ballotpedia, OpenSecrets, and the US Census Bureau. Run them in order and your structured tables will be ready for the [Political Research skill](../../skills/political-research/).
+
+Scripts are configurable for any US state via environment variables. See each script's docstring for the full list of variables.
 
 ## What it does
 
@@ -8,8 +10,8 @@ Provides four import scripts plus a district seeder:
 
 | Script | Source | What it imports |
 |--------|--------|-----------------|
-| `seed_districts.py` | Built-in | All CO congressional, state senate/house, and county districts |
-| `import_sos_results.py` | CO Secretary of State | Election results from SOS CSV exports |
+| `seed_districts.py` | Built-in | Congressional, state senate/house, and county districts for your target state |
+| `import_sos_results.py` | State Secretary of State | Election results from SOS CSV exports |
 | `import_ballotpedia.py` | Ballotpedia API | Candidate profiles, bios, party, office, social media |
 | `import_opensecrets.py` | OpenSecrets API | Campaign finance: raised, spent, cash on hand, top donors |
 | `import_census_demographics.py` | US Census ACS | Population, income, racial/ethnic breakdown by district |
@@ -17,7 +19,7 @@ Provides four import scripts plus a district seeder:
 ## Prerequisites
 
 - Working Open Brain setup (Supabase + pgvector)
-- [Colorado Politics Schema](../../schemas/colorado-politics/) applied to your database
+- [Political Research Schema](../../schemas/political-research/) applied to your database
 - Python 3.10+
 - API keys (details in each step below) — all are **free**
 
@@ -25,9 +27,9 @@ Provides four import scripts plus a district seeder:
 
 ![Step 1](https://img.shields.io/badge/Step_1-Apply_the_Schema-1565C0?style=for-the-badge)
 
-If you haven't already, apply the Colorado Politics Schema to your Supabase database. See [schemas/colorado-politics/](../../schemas/colorado-politics/).
+If you haven't already, apply the Political Research Schema to your Supabase database. See [schemas/political-research/](../../schemas/political-research/).
 
-✅ **Done when:** `co_districts`, `co_candidates`, `co_election_results`, `co_campaign_finance`, and `co_research_notes` tables exist in Supabase.
+✅ **Done when:** `pol_districts`, `pol_candidates`, `pol_election_results`, `pol_campaign_finance`, and `pol_research_notes` tables exist in Supabase.
 
 ![Step 2](https://img.shields.io/badge/Step_2-Install_Dependencies-1565C0?style=for-the-badge)
 
@@ -45,6 +47,12 @@ Create a `.env` file in the `scripts/` directory (never commit this file):
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-service-role-key
 
+# Target state — used by seed_districts.py, import_ballotpedia.py,
+# import_opensecrets.py, and import_census_demographics.py
+STATE_NAME=Colorado
+STATE_ABBR=CO
+STATE_FIPS=08
+
 # Optional — only needed for the scripts that use them
 BALLOTPEDIA_API_KEY=your-ballotpedia-key
 OPENSECRETS_API_KEY=your-opensecrets-key
@@ -58,14 +66,14 @@ CENSUS_API_KEY=your-census-key
 
 ![Step 4](https://img.shields.io/badge/Step_4-Seed_Districts-1565C0?style=for-the-badge)
 
-Run this first — it creates all 172 Colorado districts (8 congressional + 35 senate + 65 house + 64 counties):
+Run this first — it creates the congressional, state senate/house, and county districts for your target state:
 
 ```bash
 cd scripts
 python seed_districts.py
 ```
 
-✅ **Done when:** `co_districts` table has 172+ rows in Supabase.
+✅ **Done when:** `pol_districts` table has rows in Supabase.
 
 ![Step 5](https://img.shields.io/badge/Step_5-Import_Candidates_(Ballotpedia)-1565C0?style=for-the-badge)
 
@@ -75,13 +83,13 @@ Get a free API key at [ballotpedia.org/API-documentation](https://ballotpedia.or
 python import_ballotpedia.py
 ```
 
-✅ **Done when:** `co_candidates` table is populated with active Colorado candidates.
+✅ **Done when:** `pol_candidates` table is populated with active candidates.
 
 ![Step 6](https://img.shields.io/badge/Step_6-Import_Election_Results_(SOS)-1565C0?style=for-the-badge)
 
-**6.1 — Download a results CSV from the SOS:**
+**6.1 — Download a results CSV from your state's SOS:**
 
-Go to [sos.state.co.us/pubs/elections/Results](https://www.sos.state.co.us/pubs/elections/Results/) and download a CSV for your target election year.
+Most state SOS websites publish downloadable CSV exports of election results. Download one for your target election year.
 
 **6.2 — Run the import:**
 
@@ -93,9 +101,9 @@ python import_sos_results.py
 ```
 
 > [!NOTE]
-> The SOS CSV column names may vary by election year. If the script warns about missing columns, open the CSV and update the column mapping at the top of `import_sos_results.py`.
+> SOS CSV column names vary by state and year. If the script warns about missing columns, open the CSV and update the column mapping at the top of `import_sos_results.py`.
 
-✅ **Done when:** `co_election_results` has rows for your target year.
+✅ **Done when:** `pol_election_results` has rows for your target year.
 
 ![Step 7](https://img.shields.io/badge/Step_7-Import_Campaign_Finance_(OpenSecrets)-1565C0?style=for-the-badge)
 
@@ -108,7 +116,7 @@ CYCLE_YEAR=2024 python import_opensecrets.py
 > [!NOTE]
 > OpenSecrets free tier covers federal candidates only (congressional + statewide). State legislative candidates require a paid plan.
 
-✅ **Done when:** `co_campaign_finance` has rows for your target cycle.
+✅ **Done when:** `pol_campaign_finance` has rows for your target cycle.
 
 ![Step 8](https://img.shields.io/badge/Step_8-Import_Demographics_(Census)-1565C0?style=for-the-badge)
 
@@ -118,19 +126,19 @@ Get a free Census API key at [api.census.gov/data/key_signup.html](https://api.c
 python import_census_demographics.py
 ```
 
-✅ **Done when:** `co_districts.demographics` is populated with population, income, and racial/ethnic data.
+✅ **Done when:** `pol_districts.demographics` is populated with population, income, and racial/ethnic data.
 
 ## Expected outcome
 
 After all scripts complete:
 
-- **172+ districts** seeded with names and types
-- **Active Colorado candidates** imported with party, office, bio, and social links
+- **Districts** seeded with names and types for your target state
+- **Active candidates** imported with party, office, bio, and social links
 - **Election results** for your chosen year with vote counts and percentages
 - **Campaign finance** for federal candidates with raised/spent/top donors
 - **District demographics** with ACS population and income data
 
-You're ready to use the [Colorado Politics Research skill](../../skills/colorado-politics-research/).
+You're ready to use the [Political Research skill](../../skills/political-research/).
 
 ## Troubleshooting
 
@@ -140,7 +148,7 @@ Your `.env` file isn't loading. Make sure it's in the same directory as the scri
 **Ballotpedia returns 0 candidates**
 The free-tier API may require approval. Check your API key status at the Ballotpedia developer portal.
 
-**OpenSecrets: candidate not found in co_candidates**
+**OpenSecrets: candidate not found in pol_candidates**
 OpenSecrets uses its own name format. Run `import_ballotpedia.py` first, then rerun OpenSecrets. If mismatches persist, manually add the candidate via Supabase Table Editor.
 
 **Census returns -666666666 for some values**

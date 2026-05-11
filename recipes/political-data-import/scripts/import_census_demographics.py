@@ -2,9 +2,9 @@
 import_census_demographics.py
 -----------------------------
 Fetches demographic data from the US Census Bureau API
-(American Community Survey 5-year estimates) for Colorado
+(American Community Survey 5-year estimates) for a state's
 congressional and state legislative districts, and writes
-it into the co_districts.demographics JSONB column.
+it into the pol_districts.demographics JSONB column.
 
 Free Census API key: https://api.census.gov/data/key_signup.html
 
@@ -17,12 +17,18 @@ Variables fetched (ACS 5-year):
   B02001_005E — Asian alone
   B03003_003E — Hispanic or Latino
   B15003_022E — Bachelor's degree (25+)
-  B27001_001E — Health insurance coverage
+
+Environment variables:
+    STATE_FIPS   — Two-digit FIPS code for the target state (default: 08 = Colorado)
+    STATE_NAME   — Full state name, used to strip from county labels (default: Colorado)
+    ACS_YEAR     — ACS vintage year (default: 2022)
 
 Usage:
     SUPABASE_URL=https://xxx.supabase.co \
     SUPABASE_SERVICE_KEY=your-service-role-key \
     CENSUS_API_KEY=your-key \
+    STATE_FIPS=48 \
+    STATE_NAME=Texas \
     python import_census_demographics.py
 
 Requirements:
@@ -48,8 +54,9 @@ for var in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "CENSUS_API_KEY"):
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 CENSUS_BASE = "https://api.census.gov/data"
-ACS_YEAR    = "2022"  # Most recent stable ACS 5-year
-CO_FIPS     = "08"    # Colorado FIPS code
+ACS_YEAR    = os.environ.get("ACS_YEAR", "2022")
+STATE_FIPS  = os.environ.get("STATE_FIPS", "08")   # 08 = Colorado
+STATE_NAME  = os.environ.get("STATE_NAME", "Colorado")
 
 VARIABLES = ",".join([
     "NAME",
@@ -75,13 +82,13 @@ VARIABLE_LABELS = {
 }
 
 
-def fetch_census(geography: str, geo_filter: str) -> list[dict]:
-    """Fetch ACS 5-year data for a geography type in Colorado."""
+def fetch_census(geography: str) -> list[dict]:
+    """Fetch ACS 5-year data for a geography type within the target state."""
     url = f"{CENSUS_BASE}/{ACS_YEAR}/acs/acs5"
     params = {
         "get": VARIABLES,
         "for": geography,
-        "in": f"state:{CO_FIPS}",
+        "in": f"state:{STATE_FIPS}",
         "key": CENSUS_API_KEY,
     }
     try:
@@ -106,7 +113,6 @@ def build_demographics(row: dict) -> dict:
             val = None
         result[label] = val
 
-    # Compute percentage breakdowns if total_pop > 0
     if total_pop > 0:
         for pop_key in ("pop_white_alone", "pop_black_alone", "pop_native_american_alone",
                         "pop_asian_alone", "pop_hispanic_latino"):
@@ -127,7 +133,7 @@ def update_district_demographics(district_type: str, district_number_prefix: str
         demographics = build_demographics(row)
 
         result = (
-            supabase.table("co_districts")
+            supabase.table("pol_districts")
             .update({"demographics": demographics})
             .eq("type", district_type)
             .eq("district_number", district_number)
@@ -139,35 +145,31 @@ def update_district_demographics(district_type: str, district_number_prefix: str
 
 
 def main() -> None:
-    print(f"Importing Census ACS {ACS_YEAR} demographics for Colorado districts...")
+    print(f"Importing Census ACS {ACS_YEAR} demographics for {STATE_NAME} districts (FIPS {STATE_FIPS})...")
 
-    # Congressional districts
     print("  → Congressional districts")
-    rows = fetch_census("congressional district:*", f"state:{CO_FIPS}")
+    rows = fetch_census("congressional district:*")
     n = update_district_demographics("congressional", "CD-", rows, "congressional district")
     print(f"    Updated {n} congressional districts.")
 
-    # State Senate districts
     print("  → State Senate districts")
-    rows = fetch_census("state legislative district (upper chamber):*", f"state:{CO_FIPS}")
+    rows = fetch_census("state legislative district (upper chamber):*")
     n = update_district_demographics("state_senate", "SD-", rows, "state legislative district (upper chamber)")
     print(f"    Updated {n} state senate districts.")
 
-    # State House districts
     print("  → State House districts")
-    rows = fetch_census("state legislative district (lower chamber):*", f"state:{CO_FIPS}")
+    rows = fetch_census("state legislative district (lower chamber):*")
     n = update_district_demographics("state_house", "HD-", rows, "state legislative district (lower chamber)")
     print(f"    Updated {n} state house districts.")
 
-    # Counties
     print("  → Counties")
-    rows = fetch_census("county:*", f"state:{CO_FIPS}")
+    rows = fetch_census("county:*")
     updated = 0
     for row in rows:
-        county_name = row.get("NAME", "").replace(", Colorado", "").strip()
+        county_name = row.get("NAME", "").replace(f", {STATE_NAME}", "").strip()
         demographics = build_demographics(row)
         result = (
-            supabase.table("co_districts")
+            supabase.table("pol_districts")
             .update({"demographics": demographics})
             .eq("type", "county")
             .ilike("name", f"%{county_name}%")
