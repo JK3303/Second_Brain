@@ -1,0 +1,20 @@
+{
+  "name": "State Legislation Schema",
+  "description": "Database tables for tracking legislation across all 50 US states — bills, topic categories, impact assessments, news sources, and research notes linked to Open Brain thoughts.",
+  "category": "schemas",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [],
+    "tools": []
+  },
+  "tags": ["legislation", "states", "policy", "healthcare", "housing", "jobs", "impact-assessment", "research"],
+  "difficulty": "beginner",
+  "estimated_time": "10 minutes",
+  "created": "2026-05-11",
+  "updated": "2026-05-11"
+}

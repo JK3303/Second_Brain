@@ -1,0 +1,20 @@
+{
+  "name": "State Legislation Research",
+  "description": "Skill pack for researching, evaluating, and comparing legislation across all 50 US states — bill lookup, impact assessment, cross-state comparison, and best-ideas synthesis across healthcare, housing, jobs, and other policy areas.",
+  "category": "skills",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [],
+    "tools": []
+  },
+  "tags": ["legislation", "policy", "states", "healthcare", "housing", "jobs", "impact-assessment", "research", "civic", "cross-state"],
+  "difficulty": "beginner",
+  "estimated_time": "5 minutes",
+  "created": "2026-05-11",
+  "updated": "2026-05-11"
+}

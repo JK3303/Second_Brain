@@ -1,0 +1,25 @@
+{
+  "name": "State Legislation Import",
+  "description": "Import pipelines for state legislation across all 50 US states — bills and status from LegiScan, news coverage from NewsAPI, and Claude-generated impact assessments written into Open Brain.",
+  "category": "recipes",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [
+      "LegiScan API (free tier at legiscan.com)",
+      "NewsAPI (free tier at newsapi.org)",
+      "Anthropic API (for impact assessment generation)"
+    ],
+    "tools": ["Python 3.10+"]
+  },
+  "requires_skills": ["state-legislation-research"],
+  "tags": ["legislation", "policy", "states", "legiscan", "news", "impact-assessment", "healthcare", "housing", "jobs", "import"],
+  "difficulty": "intermediate",
+  "estimated_time": "1 hour",
+  "created": "2026-05-11",
+  "updated": "2026-05-11"
+}
