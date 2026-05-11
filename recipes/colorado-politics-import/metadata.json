@@ -1,0 +1,26 @@
+{
+  "name": "Colorado Politics Import",
+  "description": "Import pipelines for Colorado political data from the Secretary of State, Ballotpedia, OpenSecrets, and the US Census into your Open Brain database.",
+  "category": "recipes",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [
+      "Colorado Secretary of State (TRACER — free, no key required)",
+      "Ballotpedia API (free tier available)",
+      "OpenSecrets API (free key at opensecrets.org/api)",
+      "US Census API (free key at api.census.gov)"
+    ],
+    "tools": ["Python 3.10+"]
+  },
+  "requires_skills": ["colorado-politics-research"],
+  "tags": ["colorado", "politics", "import", "candidates", "elections", "campaign-finance", "census", "ballotpedia", "opensecrets"],
+  "difficulty": "intermediate",
+  "estimated_time": "1 hour",
+  "created": "2026-05-11",
+  "updated": "2026-05-11"
+}

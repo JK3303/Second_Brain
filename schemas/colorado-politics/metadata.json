@@ -1,0 +1,20 @@
+{
+  "name": "Colorado Politics Schema",
+  "description": "Database tables for Colorado political districts, candidates, election results, campaign finance, and research notes linked to Open Brain thoughts.",
+  "category": "schemas",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [],
+    "tools": []
+  },
+  "tags": ["colorado", "politics", "candidates", "districts", "elections", "campaign-finance", "research"],
+  "difficulty": "beginner",
+  "estimated_time": "10 minutes",
+  "created": "2026-05-11",
+  "updated": "2026-05-11"
+}
