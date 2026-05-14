@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="header">
+      <h1>Chess</h1>
+      <div id="controls">
+        <span id="thinking">Thinking…</span>
+        <select id="mode-select">
+          <option value="hvai-white">Play as White vs AI</option>
+          <option value="hvai-black">Play as Black vs AI</option>
+          <option value="hvh">Human vs Human</option>
+        </select>
+        <button id="btn-new">New Game</button>
+        <button id="btn-resign">Resign</button>
+      </div>
+    </div>
+
+    <div id="main">
+      <div id="board-wrap">
+        <div id="board"></div>
+      </div>
+
+      <div id="panel">
+        <div class="panel-section">
+          <div class="panel-label">Move History</div>
+          <div id="move-history"></div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">Captured by White</div>
+          <div id="captured-white" class="captured-pieces"></div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">Captured by Black</div>
+          <div id="captured-black" class="captured-pieces"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="status-bar">White to move</div>
+  </div>
+
+  <script type="module">
+    import {
+      createState, legalMovesFrom, applyMove, computeStatus,
+      moveToAlgebraic, needsPromotion, color, opponent, buildAttackMap,
+    } from './chess-engine.js';
+    import {
+      init, render, renderMoveHistory, renderCaptured, renderStatus, showPromotionModal,
+    } from './board-renderer.js';
+    import { getBestMoveAsync } from './ai-opponent.js';
+
+    // ---------- Game state ----------
+
+    let state = createState();
+    let selectedSquare = null;
+    let lastMove = null;
+    let moveHistory = [];       // algebraic notation strings
+    let capturedByWhite = [];
+    let capturedByBlack = [];
+    let gameOver = false;
+    let mode = 'hvai-white';    // hvai-white | hvai-black | hvh
+    let aiDepth = 3;
+    let aiThinking = false;
+
+    // ---------- DOM refs ----------
+
+    const boardEl      = document.getElementById('board');
+    const historyEl    = document.getElementById('move-history');
+    const capWhiteEl   = document.getElementById('captured-white');
+    const capBlackEl   = document.getElementById('captured-black');
+    const statusEl     = document.getElementById('status-bar');
+    const thinkingEl   = document.getElementById('thinking');
+    const modeSelect   = document.getElementById('mode-select');
+    const btnNew       = document.getElementById('btn-new');
+    const btnResign    = document.getElementById('btn-resign');
+
+    // ---------- Init ----------
+
+    init(boardEl, onSquareClick);
+    fullRender();
+
+    // ---------- Event handlers ----------
+
+    btnNew.addEventListener('click', newGame);
+    btnResign.addEventListener('click', resign);
+    modeSelect.addEventListener('change', () => { mode = modeSelect.value; newGame(); });
+
+    function newGame() {
+      state = createState();
+      selectedSquare = null;
+      lastMove = null;
+      moveHistory = [];
+      capturedByWhite = [];
+      capturedByBlack = [];
+      gameOver = false;
+      aiThinking = false;
+      thinkingEl.classList.remove('active');
+      fullRender();
+      maybeAIMove();
+    }
+
+    function resign() {
+      if (gameOver) return;
+      gameOver = true;
+      statusEl.textContent = `${state.turn === 'white' ? 'White' : 'Black'} resigned`;
+    }
+
+    // ---------- Square click ----------
+
+    function onSquareClick(idx) {
+      if (gameOver || aiThinking) return;
+
+      // In AI mode, block clicks when it's the AI's turn
+      const humanColor = mode === 'hvai-black' ? 'black' : 'white';
+      if (mode !== 'hvh' && state.turn !== humanColor) return;
+
+      const piece = state.board[idx];
+
+      if (selectedSquare === null) {
+        // Select a piece
+        if (piece && color(piece) === state.turn) {
+          selectedSquare = idx;
+        }
+      } else {
+        if (idx === selectedSquare) {
+          // Deselect
+          selectedSquare = null;
+        } else if (piece && color(piece) === state.turn) {
+          // Re-select another own piece
+          selectedSquare = idx;
+        } else {
+          // Attempt move
+          const legal = legalMovesFrom(state, selectedSquare);
+          const move = legal.find(m => m.to === idx);
+          if (move) {
+            executeMove(move);
+          } else {
+            selectedSquare = null;
+          }
+        }
+      }
+
+      render(state, selectedSquare, lastMove);
+    }
+
+    // ---------- Execute move ----------
+
+    function executeMove(move) {
+      if (needsPromotion(state, move)) {
+        showPromotionModal(state.turn, (piece) => {
+          commitMove({ ...move, promotion: piece });
+        });
+        return;
+      }
+      commitMove(move);
+    }
+
+    function commitMove(move) {
+      const notation = moveToAlgebraic(state, move);
+
+      // Track captured piece
+      const captured = state.board[move.to];
+      if (captured) {
+        if (state.turn === 'white') capturedByWhite.push(captured);
+        else capturedByBlack.push(captured);
+      }
+      if (move.enPassant) {
+        const capPawn = state.turn === 'white' ? 'p' : 'P';
+        if (state.turn === 'white') capturedByWhite.push(capPawn);
+        else capturedByBlack.push(capPawn);
+      }
+
+      state = applyMove(state, move);
+      state.status = computeStatus(state);
+
+      lastMove = move;
+      selectedSquare = null;
+      moveHistory.push(notation);
+
+      if (state.status === 'checkmate' || state.status === 'stalemate' || state.status === 'draw') {
+        gameOver = true;
+      }
+
+      fullRender();
+      maybeAIMove();
+    }
+
+    // ---------- AI ----------
+
+    async function maybeAIMove() {
+      if (gameOver || mode === 'hvh') return;
+      const aiColor = mode === 'hvai-black' ? 'white' : 'black';
+      if (state.turn !== aiColor) return;
+
+      aiThinking = true;
+      thinkingEl.classList.add('active');
+
+      const move = await getBestMoveAsync(state, aiDepth);
+      aiThinking = false;
+      thinkingEl.classList.remove('active');
+
+      if (move && !gameOver) commitMove(move);
+    }
+
+    // ---------- Render ----------
+
+    function fullRender() {
+      const attackMap = buildAttackMap(state.board);
+      render(state, selectedSquare, lastMove, attackMap);
+      renderMoveHistory(moveHistory, historyEl);
+      renderCaptured(capturedByWhite, capturedByBlack, capWhiteEl, capBlackEl);
+      renderStatus(state, statusEl);
+    }
+
+    // Kick off AI if starting as black
+    maybeAIMove();
+  </script>
+</body>
+</html>

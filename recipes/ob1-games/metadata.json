@@ -1,0 +1,16 @@
+{
+  "name": "OB1 Games",
+  "description": "A multi-game development platform. OB1 serves as the design environment and code repository — game assets, source code, and design documents are generated here and exported to the target game platform (web browser, Unity, etc.).",
+  "category": "recipes",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "0.1.0",
+  "requires": {
+    "open_brain": false
+  },
+  "tags": ["games", "chess", "web", "javascript", "game-development"],
+  "difficulty": "intermediate",
+  "estimated_time": "varies by game"
+}
