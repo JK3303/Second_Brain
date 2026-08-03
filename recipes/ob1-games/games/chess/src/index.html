@@ -50,11 +50,11 @@
     import {
       createState, legalMovesFrom, applyMove, computeStatus,
       moveToAlgebraic, needsPromotion, color, opponent, buildAttackMap,
-    } from './chess-engine.js';
+    } from './chess-engine.js?v=2';
     import {
       init, render, renderMoveHistory, renderCaptured, renderStatus, showPromotionModal,
-    } from './board-renderer.js';
-    import { getBestMoveAsync } from './ai-opponent.js';
+    } from './board-renderer.js?v=2';
+    import { getBestMoveAsync } from './ai-opponent.js?v=2';
 
     // ---------- Game state ----------
 
@@ -147,7 +147,7 @@
         }
       }
 
-      render(state, selectedSquare, lastMove);
+      fullRender();
     }
 
     // ---------- Execute move ----------

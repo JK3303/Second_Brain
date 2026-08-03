@@ -1,6 +1,6 @@
 // board-renderer.js — all DOM updates, no game logic
 
-import { legalMovesFrom, color, type } from './chess-engine.js';
+import { legalMovesFrom, color, type } from './chess-engine.js?v=2';
 
 const UNICODE = {
   K: '♔', Q: '♕', R: '♖', B: '♗', N: '♘', P: '♙',
@@ -8,12 +8,11 @@ const UNICODE = {
 };
 
 const COLORS = {
-  light: '#f0d9b5',
-  dark:  '#b58863',
+  light: '#ffffff',
+  dark:  '#ffffff',
   selected: '#7fc97f',
   legalDot: 'rgba(0,0,0,0.15)',
   legalRing: 'rgba(0,0,0,0.25)',
-  lastMove: 'rgba(255,255,0,0.35)',
   check: 'rgba(220,50,50,0.55)',
   attackWhite: '97,33,15',    // #61210F as RGB
   attackBlack: '33,104,105',  // #216869 as RGB
@@ -38,6 +37,7 @@ function init(boardEl, onSquareClick) {
   boardEl.innerHTML = '';
   boardEl.style.display = 'grid';
   boardEl.style.gridTemplateColumns = 'repeat(8, 1fr)';
+  boardEl.style.gridTemplateRows = 'repeat(8, 1fr)';
 
   for (let i = 0; i < 64; i++) {
     const sq = document.createElement('div');
@@ -63,7 +63,6 @@ function render(state, selectedSquare, lastMove, attackMap) {
     const isLight = (r + f) % 2 === 0;
 
     let bg = isLight ? COLORS.light : COLORS.dark;
-    if (_lastMove && (i === _lastMove.from || i === _lastMove.to)) bg = COLORS.lastMove;
     if (i === _selectedSquare) bg = COLORS.selected;
 
     sq.style.backgroundColor = bg;
@@ -97,10 +96,10 @@ function render(state, selectedSquare, lastMove, attackMap) {
         overlay.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;';
 
         if (wa > 0 && ba > 0) {
-          // Split horizontally: top = white attack color, bottom = black attack color
+          // Split horizontally: top = black attack color, bottom = white attack color
           overlay.style.background = `linear-gradient(to bottom,
-            rgba(${COLORS.attackWhite},${wAlpha}) 50%,
-            rgba(${COLORS.attackBlack},${bAlpha}) 50%)`;
+            rgba(${COLORS.attackBlack},${bAlpha}) 50%,
+            rgba(${COLORS.attackWhite},${wAlpha}) 50%)`;
         } else if (wa > 0) {
           overlay.style.background = `rgba(${COLORS.attackWhite},${wAlpha})`;
         } else {

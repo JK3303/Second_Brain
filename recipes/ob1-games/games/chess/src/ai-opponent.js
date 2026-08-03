@@ -1,6 +1,6 @@
 // ai-opponent.js — minimax with alpha-beta pruning
 
-import { allLegalMoves, applyMove, computeStatus, color, type } from './chess-engine.js';
+import { allLegalMoves, applyMove, computeStatus, color, type } from './chess-engine.js?v=2';
 
 // ---------- Piece values ----------
 
