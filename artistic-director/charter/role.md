@@ -34,4 +34,7 @@
 
 ## Human's own artistic ambitions
 
-_To be filled in by the human holder as the studio develops._
+- Primary interest is visual design — creating images that hold attention and reward closer looking.
+- Developing the skill of directing AI image generation: getting from a first draft to a finished piece through iterative refinement and precise editing instructions.
+- The core challenge is the revision loop — learning how to describe what's wrong with an AI-generated image and what "right" looks like, so the AI corrects accurately rather than drifting or losing what worked.
+- Success means being able to consistently produce visually interesting work through AI collaboration, not just lucky first attempts.
