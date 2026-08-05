@@ -13,3 +13,12 @@ The quality that makes a viewer stop and look. In the Rootmind exercise, visual 
 
 ## Tech-invisible branding
 An identity approach where the product's technology is not signaled through visual elements in the brand mark. The tech is communicated through the product experience, not the logo. Contrast with tech-forward branding where capability is the visual lead.
+
+## Intent-based navigation
+Organizing a website or brand experience around the customer's purpose rather than the product taxonomy. Instead of leading with product categories (rings, earrings, necklaces), lead with the customer's reason for being there (engagement, anniversary, milestone, self-gift). Validated in the Grace Gems Phase 2 exploration.
+
+## Story-first layout
+A page structure where narrative content (customer stories, quotes, occasion context) is the primary entry point, with product browsing accessible but secondary. The entire site is shoppable, but it never feels like a catalog until the moment the customer is ready. Contrast with grid-first or catalog-first layouts.
+
+## Made for you
+Preferred language for personalized/bespoke/custom jewelry services. Warmer and more accessible than "custom" (transactional), "bespoke" (pretentious at this price point), or "commissioned" (art-world formal). Reinforces the customer-centric brand promise.
