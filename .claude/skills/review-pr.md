@@ -1,11 +1,11 @@
 ---
 name: review-pr
-description: Run admin review on an OB1 pull request. Covers what CI can't — security deep scan, mission fit, naming consistency, and generates admin summary, Discord draft, and post-merge task list. Takes PR number as argument (e.g., "review PR 21").
+description: Run admin review on a Second_Brain pull request. Covers what CI can't — security deep scan, mission fit, naming consistency, and generates admin summary, Discord draft, and post-merge task list. Takes PR number as argument (e.g., "review PR 21").
 ---
 
-# OB1 PR Review — Admin Skill
+# Second_Brain PR Review — Admin Skill
 
-Run the human-judgment layer of PR review on OB1. CI handles the mechanical checks (11 rules, scope, links, post-merge reminders). This skill handles everything CI can't automate.
+Run the human-judgment layer of PR review on Second_Brain. CI handles the mechanical checks (11 rules, scope, links, post-merge reminders). This skill handles everything CI can't automate.
 
 ## Input
 
@@ -34,7 +34,7 @@ CI only does basic credential pattern matching. Scan deeper:
 
 ## Step 3: Mission Fit
 
-Assess against OB1's core: "One brain, all your AI tools."
+Assess against Second_Brain's core: "One brain, all your AI tools."
 
 - Does this add a capture, retrieval, or processing capability for Open Brain?
 - Does it complement existing contributions? Check `recipes/`, `schemas/`, etc. for overlap.
@@ -70,7 +70,7 @@ Per CONTRIBUTING.md, must include: what it does, what it requires, confirmation 
 - **Approve** — all clear
 - **Approve with required changes** — minor fixes needed, list them
 - **Request changes** — significant issues, list with explanations
-- **Reject** — doesn't fit OB1, duplicates work, or security concerns
+- **Reject** — doesn't fit Second_Brain, duplicates work, or security concerns
 
 ### C: Admin Summary (Shareable)
 
@@ -117,5 +117,5 @@ Compose the review to post on the PR:
 ## Notes
 
 - This skill does NOT re-run CI checks. It reads CI results and adds the judgment layer.
-- Any admin using Claude Code in the OB1 repo has this skill. The outputs (admin summary, PR comment) are designed to be shared with admins who don't use Claude Code.
+- Any admin using Claude Code in the Second_Brain repo has this skill. The outputs (admin summary, PR comment) are designed to be shared with admins who don't use Claude Code.
 - Return to original branch after review: `git checkout <branch>`

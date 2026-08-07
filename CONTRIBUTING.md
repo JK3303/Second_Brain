@@ -1,4 +1,4 @@
-# Contributing to OB1
+# Contributing to Second_Brain
 
 ## Before You Contribute
 

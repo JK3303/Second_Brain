@@ -1,14 +1,22 @@
 <p align="center">
-  <img src=".github/ob1-logo-wide.png" alt="Open Brain" width="600">
+  <img src=".github/ob1-logo-wide.png" alt="Second Brain" width="600">
 </p>
 
-<h1 align="center">Open Brain</h1>
+<h1 align="center">Second_Brain</h1>
 
-The infrastructure layer for your thinking. One database, one AI gateway, one chat channel. Any AI you use can plug in. No middleware, no SaaS chains, no Zapier.
+A personal AI second-brain system for projects, memories, skills, and experiments. Built on the [Open Brain](https://github.com/NateBJones-Projects/OB1) infrastructure — one database (Supabase + pgvector), one MCP protocol, any AI client.
 
-This isn't a notes app. It's a database with vector search and an open protocol — built so that every AI tool you use shares the same persistent memory of you. Claude, ChatGPT, Cursor, Claude Code, whatever ships next month. One brain. All of them.
+This repo is the working home for creative projects, AI-assisted workflows, and personal knowledge tools. It inherits the Open Brain extension ecosystem and adds project-specific work on top.
 
-> Open Brain was created by [Nate B. Jones](https://natesnewsletter.substack.com/). Follow the [Substack](https://natesnewsletter.substack.com/) for updates, discussion, and the companion prompt pack. Join the [Discord](https://discord.gg/Cgh9WJEkeG) for real-time help and community.
+> Originally forked from [Open Brain](https://github.com/NateBJones-Projects/OB1) by [Nate B. Jones](https://natesnewsletter.substack.com/). The upstream community, extensions, and learning path remain available there.
+
+## Projects
+
+| Project | What It Is | Status |
+|---------|-----------|--------|
+| [`artistic-director/`](artistic-director/) | Creative collaboration studio — role definition, AI working methods, creative memory, and practice space | Phase 2 (Grace Gems creative exploration) |
+
+Each project operates independently within the shared repository infrastructure. See the project's own README for details.
 
 ## Getting Started
 
@@ -194,9 +202,9 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) for the full details. The short version:
 
 ## Who Maintains This
 
-Created by [Nate B. Jones](https://github.com/NateBJones).
+This fork is maintained by [JK3303](https://github.com/JK3303).
 
-The OB1 repo team: [Jonathan Edwards](https://github.com/justfinethanku), Repo Manager; [Matt Hallett](https://github.com/matthallett1), Community Admin; [Alan Shurafa](https://github.com/alanshurafa), Community Maintainer. PRs are reviewed by the automated agent + human maintainers.
+Open Brain was created by [Nate B. Jones](https://github.com/NateBJones). The upstream OB1 repo team: [Jonathan Edwards](https://github.com/justfinethanku), Repo Manager; [Matt Hallett](https://github.com/matthallett1), Community Admin; [Alan Shurafa](https://github.com/alanshurafa), Community Maintainer.
 
 ## License
 

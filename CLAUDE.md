@@ -1,10 +1,10 @@
-# CLAUDE.md — Agent Instructions for Open Brain
+# CLAUDE.md — Agent Instructions for Second_Brain
 
 This file helps AI coding tools (Claude Code, Codex, Cursor, etc.) work effectively in this repo.
 
 ## What This Repo Is
 
-Open Brain is a persistent AI memory system — one database (Supabase + pgvector), one MCP protocol, any AI client. This repo contains the extensions, recipes, schemas, dashboards, integrations, and skills that the community builds on top of the core Open Brain setup.
+Second_Brain is a personal AI second-brain system for projects, memories, skills, and experiments. Built on the [Open Brain](https://github.com/NateBJones-Projects/OB1) infrastructure — one database (Supabase + pgvector), one MCP protocol, any AI client. This repo inherits the Open Brain extension ecosystem and adds project-specific work (e.g., `artistic-director/`) on top.
 
 **License:** FSL-1.1-MIT. No commercial derivative works. Keep this in mind when generating code or suggesting dependencies.
 
