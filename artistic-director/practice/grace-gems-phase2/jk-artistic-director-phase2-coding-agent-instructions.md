@@ -1,13 +1,13 @@
 # JK — Artistic Director Phase 2 Coding-Agent Instructions
 
 **Relay ID:** GG-AD-P2-001  
-**Purpose:** Begin the Grace Gems Phase 2 creative investigation inside the OB1 Artistic Director studio.  
+**Purpose:** Begin the Grace Gems Phase 2 creative investigation inside the Second_Brain Artistic Director studio.  
 **Status:** Bounded internal exploration only.
 
 ## How to use this file
 
 Paste the instruction block below into your coding agent from the root of your
-OB1 repository. The agent should inspect the existing `artistic-director/`
+Second_Brain repository. The agent should inspect the existing `artistic-director/`
 folder before making changes and should preserve the repository's existing
 structure and conventions.
 
@@ -111,7 +111,7 @@ permission to build, deploy, publish, or launch a website.
    the Artistic Director workspace. Prefer a dedicated area such as
    `artistic-director/practice/grace-gems-phase2/` if it fits the repository's
    existing conventions.
-3. Do not alter unrelated OB1 infrastructure.
+3. Do not alter unrelated Second_Brain infrastructure.
 4. Do not rewrite the charter, authority boundaries, or accepted lessons based
    on this project.
 5. Record project-specific lessons separately until the human Artistic

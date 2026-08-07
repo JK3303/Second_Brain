@@ -17,7 +17,7 @@ The Artistic Director overlay cannot independently authorize:
 - No credentials, API keys, secrets, or tokens in any committed file.
 - No raw Open Brain captures containing private personal, client, customer, financial, or account information.
 - No Grace Gems data in Phase 1. Campaign material enters only after Phase 1 completion and in a separately bounded area.
-- The public GitHub repo and the external OB1 database are separate surfaces. Protect both independently.
+- The public GitHub repo and the external database are separate surfaces. Protect both independently.
 
 ## Creative decision vs. authority approval
 

@@ -1,10 +1,10 @@
 # Artistic Director Studio
 
-An independent Artistic Director operating layer built on OB1 (Open Brain).
+A creative collaboration studio within Second_Brain — a personal AI second-brain system for projects, memories, skills, and experiments.
 
 ## What this is
 
-This overlay adds a creative collaboration studio to the existing OB1 repository. OB1 remains the single technical and GitHub repository; this directory provides role definition, AI working methods, creative memory, and a practice space for the Artistic Director.
+This directory is one project inside the Second_Brain repository. It provides role definition, AI working methods, creative memory, and a practice space for the Artistic Director. The studio operates independently while sharing the repository's infrastructure and history.
 
 The overlay is not required to stay in exact sync with Anyang Intelligence. The human owns the creative evolution of the studio.
 
