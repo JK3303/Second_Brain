@@ -1,0 +1,16 @@
+{
+  "name": "Game Design",
+  "description": "JK's active game-design workspace. Chess is the first prototype — game assets, source code, and design documents are developed here with AI support.",
+  "category": "projects",
+  "author": {
+    "name": "Jon Kuhne",
+    "github": "JK3303"
+  },
+  "version": "0.1.0",
+  "requires": {
+    "open_brain": false
+  },
+  "tags": ["games", "chess", "web", "javascript", "game-development"],
+  "difficulty": "intermediate",
+  "estimated_time": "varies by game"
+}

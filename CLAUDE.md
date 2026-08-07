@@ -4,7 +4,7 @@ This file helps AI coding tools (Claude Code, Codex, Cursor, etc.) work effectiv
 
 ## What This Repo Is
 
-Second_Brain is a personal AI second-brain system for projects, memories, skills, and experiments. Built on the [Open Brain](https://github.com/NateBJones-Projects/OB1) infrastructure — one database (Supabase + pgvector), one MCP protocol, any AI client. This repo inherits the Open Brain extension ecosystem and adds project-specific work (e.g., `artistic-director/`) on top.
+Second_Brain is a personal AI second-brain system for projects, memories, skills, and experiments. Built on the [Open Brain](https://github.com/NateBJones-Projects/OB1) infrastructure — one database (Supabase + pgvector), one MCP protocol, any AI client. This repo inherits the Open Brain extension ecosystem and adds project-specific work (e.g., `projects/artistic-director/`) on top.
 
 **License:** FSL-1.1-MIT. No commercial derivative works. Keep this in mind when generating code or suggesting dependencies.
 
@@ -64,6 +64,18 @@ DESCRIBE THE EXACT WORK.
 - If another chat suddenly changed branches, both chats were probably in the same working directory.
 - If `git worktree add` says a branch is already checked out, create a new branch name or remove the old clean worktree.
 - If cleanup fails, inspect `git status --short` and preserve uncommitted work.
+
+## Second Brain Substrate
+
+This repo uses five reusable procedures for human-AI collaboration. See `docs/second-brain/` for details.
+
+- **[Intent Recovery](docs/second-brain/intent-recovery.md)** — Recovered intent is an inference, not a fact. Never treat it as authorization.
+- **[Project Membranes](docs/second-brain/project-membranes.md)** — Project-local information does not become global memory automatically.
+- **[Decision States](docs/second-brain/decision-states.md)** — A draft or recommendation is not approval. Distinguish creative approval from authority approval.
+- **[Lesson Promotion](docs/second-brain/lesson-promotion.md)** — Lessons require explicit human acceptance. No automatic promotion.
+- **[Calibration Loops](docs/second-brain/calibration-loop.md)** — Preserve uncertainty instead of filling missing facts.
+
+The agent must preserve uncertainty instead of filling gaps with plausible assumptions. External action requires explicit permission.
 
 ## Guard Rails
 

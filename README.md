@@ -12,11 +12,12 @@ This repo is the working home for creative projects, AI-assisted workflows, and 
 
 ## Projects
 
+Active personal work developed using Second_Brain and AI systems. See [`projects/`](projects/) for details.
+
 | Project | What It Is | Status |
 |---------|-----------|--------|
-| [`artistic-director/`](artistic-director/) | Creative collaboration studio — role definition, AI working methods, creative memory, and practice space | Phase 2 (Grace Gems creative exploration) |
-
-Each project operates independently within the shared repository infrastructure. See the project's own README for details.
+| [Artistic Director](projects/artistic-director/) | Human-led, AI-supported creative studio | Active — internal |
+| [Game Design](projects/game-design/) | Game-design workspace (chess prototype) | Prototype |
 
 ## Getting Started
 
