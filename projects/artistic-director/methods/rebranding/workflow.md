@@ -24,6 +24,14 @@ Roles used below:
 - **Decision-maker** — the single named person at the client who holds selection authority.
 - **AI** — the assisting system. Organizes, drafts, validates, and assembles. Decides nothing.
 
+## Hard stops
+
+Steps 1, 5, 9, 10, and 12 are **hard stops**. AI does not produce their substance and does not proceed past them by producing provisional work and labelling it.
+
+This is stated separately because labelling proved insufficient. Marking a step manual-judgment tells AI who owns it; it does not stop AI from doing it anyway when a deliverable is close to complete. **Completion pressure predicts boundary crossings**, and the pressure is highest exactly where the remaining work is small and the owner is absent.
+
+At a hard stop, AI stops and asks. It does not produce a "proposed" version for later ratification. Ratification after the fact closes an item; it does not make the crossing acceptable, and being right is not the same as being authorised.
+
 ---
 
 ## Step 1 — Authority / source gate
@@ -41,6 +49,7 @@ Roles used below:
 
 **Exit gate — all must be true:**
 - [ ] The decision-maker is a specific named person, not a group or a role.
+- [ ] **The decision-maker's identity has been checked against the evidence, not taken from the brief alone.** A brief is a source, not a certainty — it can assert a name, role, or pronouns that the evidence contradicts. Where brief and evidence disagree, the AD resolves it before any other step runs.
 - [ ] An approved private engagement surface exists and has been designated by the AD.
 - [ ] The non-authorization list is written down.
 

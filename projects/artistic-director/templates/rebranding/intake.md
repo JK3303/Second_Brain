@@ -47,6 +47,17 @@ Only these may be used. Anything else is out of scope until added here by the AD
 
 **Explicitly excluded sources:**
 
+**Evidence ceiling — required, not optional.** State plainly what the approved source set can and cannot support, before any work rests on it:
+
+| Question | Answer |
+|----------|--------|
+| Are any sources primary? | |
+| Was anything independently verified? | |
+| Is any source inherited from a prior phase or engagement? | |
+| **Highest confidence any downstream claim can carry** | |
+
+> Inherited research inherits its gaps. A source set reused from earlier work carries that work's evidential ceiling and its blind spots, and every claim built on it inherits both. Record the ceiling here so it constrains scoring later instead of surfacing as a surprise.
+
 ---
 
 ## 3. The ask, in the client's words

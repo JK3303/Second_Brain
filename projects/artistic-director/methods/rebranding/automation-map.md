@@ -46,7 +46,8 @@ Steps 5, 9, 10, and 12 are deliberately excluded from automation. They are the p
 ## Standing constraints
 
 1. **No step may be reclassified toward more automation on the basis of a single engagement.** One clean run is not evidence that a check generalizes.
-2. **Automation may flag; it may not resolve.** Every automated check outputs findings for a human, never a corrected artifact presented as final.
-3. **A passing automated check is not a sign-off.** Sign-off remains a human act at Steps 3, 7, and 8.
-4. **No automation may write to overlay memory.** Promotion is human-gated without exception.
-5. **No efficiency claim without a comparable prior engagement.** The first run under this method is a baseline. "Faster" requires two data points and comparable scope.
+2. **A `manual-judgment` or `blocked` classification is a hard stop, not a label.** AI does not produce the substance of these steps and does not proceed by producing provisional work for later ratification. See the hard-stops section in [`workflow.md`](workflow.md#hard-stops).
+3. **Automation may flag; it may not resolve.** Every automated check outputs findings for a human, never a corrected artifact presented as final.
+4. **A passing automated check is not a sign-off.** Sign-off remains a human act at Steps 3, 7, and 8.
+5. **No automation may write to overlay memory.** Promotion is human-gated without exception.
+6. **No efficiency claim without a comparable prior engagement.** The first run under this method is a baseline. "Faster" requires two data points and comparable scope.
