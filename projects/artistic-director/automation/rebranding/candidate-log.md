@@ -22,6 +22,7 @@ Every proposed automation for the rebranding workflow. Nothing here is adopted, 
 | AC-08 | Template scaffolding — instantiate the engagement document set from the templates once the authority gate passes | 2 | proposed | 0 | Low risk. Must not pre-fill any content, only structure. | — | — |
 | AC-09 | Metric collection — accumulate timings and correction counts into the cohort-metrics structure | 13 | proposed | 0 | Must record **not measured** rather than estimating. An estimating collector is worse than no collector. | — | — |
 | AC-10 | Claim-type consistency check — confirm every claim carries exactly one of the five claim types | 3, 7 | proposed | 0 | False negative allows blended claim types, the failure this method exists to prevent. | — | — |
+| AC-11 | Typeface delivery check — for any digital artifact, resolve each declared font stack against the faces the artifact actually ships, and flag stacks whose first available match is a system fallback | 6, 7 | proposed | 0 | False negative ships work whose typography silently substitutes for most viewers while looking correct to the reviewer who has the font installed. The failure is invisible on the machine most likely to be checking. | — | — |
 
 ---
 

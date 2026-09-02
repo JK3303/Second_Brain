@@ -42,6 +42,7 @@ The Workflow Step 7 gate. Run before any package reaches a decision-maker.
 - [ ] Unresolved rights items have a named owner and a resolution path
 - [ ] Proposed names, taglines, and marks are flagged as requiring clearance before any use
 - [ ] Typeface licence status is recorded for every typeface shown
+- [ ] Every typeface shown is actually **delivered** by the artifact. A font stack naming platform-specific faces with no embedded or linked webfont renders as a fallback on any machine lacking them — and the substitution is invisible to a reviewer whose own machine has the font installed. Check on a machine that does not.
 
 ---
 
