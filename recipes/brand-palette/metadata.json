@@ -1,0 +1,11 @@
+{
+  "name": "Brand Palette to CSS",
+  "description": "Compile explicitly chosen color tokens into CSS and check declared text and UI contrast pairs.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "tools": ["Python 3.11+"], "services": []},
+  "tags": ["brand-system", "css", "contrast"],
+  "difficulty": "beginner",
+  "estimated_time": "10 minutes"
+}

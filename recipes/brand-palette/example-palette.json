@@ -1,0 +1,15 @@
+{
+  "colors": {
+    "paper": "#f6f3e9",
+    "ink": "#29332e",
+    "forest": "#315448",
+    "surface": "{paper}",
+    "text": "{ink}",
+    "action": "{forest}"
+  },
+  "pairs": [
+    {"name": "body-copy", "foreground": "text", "background": "surface", "usage": "text"},
+    {"name": "button-label", "foreground": "paper", "background": "action", "usage": "text"},
+    {"name": "button-boundary", "foreground": "action", "background": "surface", "usage": "ui"}
+  ]
+}
