@@ -1,0 +1,11 @@
+{
+  "name": "Project Resume",
+  "description": "Build a source-linked resumption packet from an existing project manifest, handoff, questions, and holds; detect changed source bytes.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "services": [], "tools": ["Python 3.11+"]},
+  "tags": ["projects", "handoff", "provenance"],
+  "difficulty": "beginner",
+  "estimated_time": "5 minutes"
+}
