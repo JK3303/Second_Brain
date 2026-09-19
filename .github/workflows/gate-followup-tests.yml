@@ -1,0 +1,26 @@
+name: Gate Follow-Up Tests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/scripts/gate-followup*'
+      - '.github/workflows/ob1-gate-v2.yml'
+      - '.github/workflows/ob1-pr-followups.yml'
+      - '.github/workflows/gate-followup-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test .github/scripts/gate-followup.test.cjs
