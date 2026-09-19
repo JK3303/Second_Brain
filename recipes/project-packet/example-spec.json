@@ -1,0 +1,5 @@
+{
+  "recipient": "Human collaborator reviewing the project boundary",
+  "purpose": "Understand the project role without transferring client practice material",
+  "files": ["manifest.md", "charter/role.md", "charter/boundaries.md"]
+}
