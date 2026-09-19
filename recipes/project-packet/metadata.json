@@ -1,0 +1,11 @@
+{
+  "name": "Reviewed Project Packet",
+  "description": "Export explicitly selected project text with a review digest bound to content, recipient, and purpose.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "tools": ["Python 3.11+"], "services": []},
+  "tags": ["project-boundaries", "handoff", "local-first"],
+  "difficulty": "beginner",
+  "estimated_time": "10 minutes"
+}
