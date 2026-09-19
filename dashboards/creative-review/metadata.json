@@ -1,0 +1,11 @@
+{
+  "name": "Creative Review Workbench",
+  "description": "Compare creative directions, preserve exact human critique across rounds, and inspect revisions in a local browser workspace with JSON import and export.",
+  "category": "dashboards",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "services": [], "tools": ["Modern browser", "Node.js 22+ for tests"]},
+  "tags": ["creative-review", "calibration", "human-judgment"],
+  "difficulty": "beginner",
+  "estimated_time": "5 minutes"
+}
