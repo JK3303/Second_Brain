@@ -1,0 +1,11 @@
+{
+  "name": "Local Markdown Link Check",
+  "description": "Check bounded project Markdown file references with source ranges and explicit coverage limits.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "tools": ["Node.js 22+", "npm"], "services": []},
+  "tags": ["documentation", "handoff", "link-checking"],
+  "difficulty": "beginner",
+  "estimated_time": "5 minutes"
+}
