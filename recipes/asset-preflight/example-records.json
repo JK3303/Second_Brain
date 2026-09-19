@@ -1,0 +1,13 @@
+[
+  {
+    "id": "hero-photo",
+    "path": "assets/hero.jpg",
+    "sha256": "",
+    "status": "unknown",
+    "uses": ["website"],
+    "reviewer": "",
+    "evidence": "",
+    "credit": "",
+    "expires": ""
+  }
+]
