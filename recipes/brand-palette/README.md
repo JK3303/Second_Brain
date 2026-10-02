@@ -8,9 +8,12 @@ This bridges a written brand direction and implementation. It does not infer
 approved colors from prose. The supplied palette is a fictional demonstration,
 not an approved Grace Gems design or a change to its brand system.
 
-## Requirements
+## Prerequisites
 
-An Open Brain / Second_Brain workflow and Python 3.11+, standard library only.
+1. An Open Brain / Second_Brain workflow.
+2. Python 3.11+, standard library only.
+3. A palette specification listing the tokens and the pairs to check.
+
 No packages, model, browser service, credentials, or network connection.
 
 ## 1. Choose tokens and uses
@@ -69,7 +72,12 @@ empty file on failure, so check the exit status before replacing working CSS.
 **Done when:** exported tokens match the selected palette and are tested in
 the actual rendered interface.
 
-## Limits and verification
+## Expected outcome, limits, and verification
+
+A compliant palette exits 0 and reports every declared pair with
+`"passes": true`, its measured `ratio`, and the `minimum` applied. The report
+always carries its notice: declared pairs only, not a complete accessibility
+audit or brand approval.
 
 Only opaque sRGB hex colors are supported. No alpha, gradients, photographs,
 blend modes, computed styles, font metrics, focus behavior, or unlisted pairs
