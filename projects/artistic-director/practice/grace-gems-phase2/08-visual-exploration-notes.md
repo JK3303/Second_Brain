@@ -11,6 +11,7 @@
 Two visual concepts rendered inline:
 
 ### 1. Brand moodboard
+
 - **Color palette:** Warm cream (#F5F0EB), soft gold (#C9A96E), warm charcoal (#3D3530)
 - **Gemstone accent colors:** Emerald, ruby, teal, sapphire, opal fire
 - **Typography direction:** Humanist serif for headlines/wordmark, clean sans for body
@@ -19,6 +20,7 @@ Two visual concepts rendered inline:
 - **Wordmark concept:** "Grace Gems" in serif on dark warm background, with sample hero treatment
 
 ### 2. Homepage wireframe
+
 - **Navigation:** Stories, Collections, Custom, About, Contact (no "Shop" link)
 - **Hero:** Single customer story with on-person photography and quote
 - **Occasion navigation:** "What moment are you marking?" with four tiles: Engagement, Anniversary, Milestone, Self-gift
