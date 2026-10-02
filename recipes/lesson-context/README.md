@@ -8,11 +8,13 @@ scope, and always includes that project's unresolved questions.
 It works directly with the current Artistic Director memory files. No database,
 embeddings, indexing service, model, or new memory format is needed.
 
-## Requirements
+## Prerequisites
 
-An Open Brain / Second_Brain project and Python 3.11+ (standard library only).
-The three fixed inputs are `memory/accepted-lessons.md`,
-`memory/rejected-lessons.md`, and `memory/open-questions.md` under the project.
+1. An Open Brain / Second_Brain project folder.
+2. Python 3.11+, standard library only.
+3. Three memory files under the project: `memory/accepted-lessons.md`,
+   `memory/rejected-lessons.md`, and `memory/open-questions.md`.
+
 Missing sources are reported explicitly. Nothing is created or changed.
 
 ## 1. Describe the current brief
@@ -64,7 +66,12 @@ junctions are rejected. Output may include private project context: keep it
 inside the project's boundary. Brief text supplied on the command line may be
 recorded in shell history; use non-sensitive search terms.
 
-## Verification
+## Expected outcome and verification
+
+A run exits 0 and prints a JSON report naming each of the three memory files
+with its state and hash, followed by the matching accepted lessons, rejected
+approaches, and open questions quoted with their line ranges. A missing file is
+reported as a source state, never as an absence of matches.
 
 ```bash
 python -m unittest discover -s recipes/lesson-context -p "test_*.py" -v
