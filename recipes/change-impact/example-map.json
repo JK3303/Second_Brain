@@ -1,0 +1,7 @@
+{
+  "nodes": [
+    {"id": "brief", "path": "brief.md", "kind": "source", "depends_on": [], "rationale": "The fictional source brief defines the task."},
+    {"id": "direction", "path": "direction.md", "kind": "decision", "depends_on": ["brief"], "rationale": "The direction responds to the audience and constraint in the brief."},
+    {"id": "delivery", "path": "delivery.md", "kind": "artifact", "depends_on": ["direction"], "rationale": "The draft deliverable implements the selected direction."}
+  ]
+}
