@@ -15,6 +15,7 @@ Phase 2 creative exploration complete. All deliverables produced, all build deci
 ## What has been done
 
 ### Phase 1 (2026-08-03)
+
 - Directory structure and all files scaffolded.
 - Charter (role, boundaries, working agreement) established.
 - AI layer (system instructions, collaboration loop, critique rubric, prompt patterns) defined.
@@ -27,6 +28,7 @@ Phase 2 creative exploration complete. All deliverables produced, all build deci
 - Review receipt logged.
 
 ### Phase 2 (2026-08-05)
+
 - Grace Gems current-state reading completed from public Etsy data.
 - Three materially different creative territories proposed (A: The Jeweler's Bench, B: Earth to Gold, C: Your Stone, Your Story).
 - Human AD selected Territory C — customer-centric.
