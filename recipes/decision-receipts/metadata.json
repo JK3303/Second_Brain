@@ -1,0 +1,11 @@
+{
+  "name": "Decision Receipt Validation",
+  "description": "Check existing Markdown decision receipts for completeness, duplicate IDs, missing hold context, and broken or cyclic supersession chains.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "services": [], "tools": ["Python 3.11+"]},
+  "tags": ["decisions", "projects", "validation"],
+  "difficulty": "beginner",
+  "estimated_time": "10 minutes"
+}
