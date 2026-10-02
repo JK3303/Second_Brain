@@ -8,11 +8,11 @@ This local companion implements the selection boundary in
 [Project Membranes](../../docs/second-brain/project-membranes.md). It does not
 send anything, redact text, detect secrets, or grant permission to share.
 
-## Requirements
+## Prerequisites
 
-- An Open Brain / Second_Brain repository with a project folder.
-- Python 3.11+; no packages, credentials, network, or Supabase connection.
-- A private place for the specification and output, outside a public checkout.
+1. An Open Brain / Second_Brain repository with a project folder.
+2. Python 3.11+; no packages, credentials, network, or Supabase connection.
+3. A private place for the specification and output, outside a public checkout.
 
 ## 1. Select the smallest useful context
 
