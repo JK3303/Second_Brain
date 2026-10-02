@@ -9,10 +9,14 @@ It complements the Artistic Director's
 and [attribution log](../../projects/artistic-director/references/rights-and-attribution.md).
 It checks recorded data, not the validity of a license or a legal conclusion.
 
-## Requirements
+## Prerequisites
 
-An Open Brain / Second_Brain project, Python 3.11+, and a private inventory.
-Standard library only. No network requests, asset upload, or project changes.
+1. An Open Brain / Second_Brain project containing the assets you intend to
+   hand off.
+2. Python 3.11+, standard library only.
+3. A private inventory file, kept outside a public checkout.
+
+No network requests, asset upload, or project changes.
 
 ## 1. Record the intended assets
 
@@ -72,7 +76,11 @@ paths and globs are unsupported. Limits: 500 records, 2 MiB inventory, 100 MiB
 per asset. Files should remain stable during the check. JSON output contains
 credits and evidence references, so treat it according to the project boundary.
 
-## Verification
+## Expected outcome and verification
+
+A clean run reports `record_gaps: 0` and an empty `findings` list for every
+listed asset. Any other result names the specific gap to resolve before
+handoff.
 
 ```bash
 python -m unittest discover -s recipes/asset-preflight -p "test_*.py" -v
