@@ -1,0 +1,9 @@
+{
+  "name": "second-brain-local-link-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Read-only Markdown file-link checks for a bounded project handoff",
+  "scripts": {"test": "node --test check.test.cjs"},
+  "engines": {"node": ">=22"},
+  "dependencies": {"markdown-it": "14.3.0"}
+}
