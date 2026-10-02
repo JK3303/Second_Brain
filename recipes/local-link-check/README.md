@@ -5,12 +5,15 @@ Choose exact Markdown inputs and a repository root; the checker parses links
 and images, reports missing files and case mismatches, and points to the source
 block containing each reference. It never follows network links.
 
-## Requirements
+## Prerequisites
 
-An Open Brain / Second_Brain repository, Node.js 22+, and npm. This local
-companion uses pinned `markdown-it` to parse Markdown rather than treating
-links inside code examples as real references. Installation requires npm
-registry access; checking has no network behavior or credentials.
+1. An Open Brain / Second_Brain repository.
+2. Node.js 22+ and npm.
+3. npm registry access for the initial install only.
+
+This local companion uses pinned `markdown-it` to parse Markdown rather than
+treating links inside code examples as real references. Checking itself has no
+network behavior or credentials.
 
 ## 1. Install
 
