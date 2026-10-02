@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Creative Review — Second Brain</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header><div><p class="eyebrow">SECOND BRAIN / STUDIO</p><h1>Make the next revision count.</h1><p class="intro">Compare directions. Preserve your critique. Keep the idea worth protecting.</p></div><span class="badge">Local · no uploads</span></header>
+  <main>
+    <section class="brief" aria-labelledby="brief-heading">
+      <div><h2 id="brief-heading">The creative intention</h2><p>What should someone feel or understand?</p></div>
+      <label>Objective<textarea id="objective" rows="3" maxlength="6000" placeholder="Describe the encounter you want to create."></textarea></label>
+      <label>Reviewer<input id="reviewer" maxlength="6000" placeholder="Name or initials"></label>
+    </section>
+    <section aria-labelledby="directions-heading">
+      <div class="section-heading"><div><p class="eyebrow">01 / DIRECTIONS</p><h2 id="directions-heading">Look at what is different.</h2></div><button id="add">Add a direction</button></div>
+      <p class="hint">Use the lenses that matter to this brief. Empty fields remain unknown. “Revise” records a creative choice; it grants no external authority.</p>
+      <div id="directions" class="directions"></div>
+    </section>
+    <section class="record" aria-labelledby="round-heading">
+      <div><p class="eyebrow">02 / REVIEW ROUND</p><h2 id="round-heading">Keep the reason, too.</h2><p>Record the current directions and your exact words before making the next revision.</p></div>
+      <label>Round note<textarea id="reason" rows="2" maxlength="6000" placeholder="What changed your mind? What should the next revision preserve?"></textarea></label>
+      <button id="capture" class="primary">Record this round</button>
+    </section>
+    <section aria-labelledby="history-heading"><div class="section-heading"><div><p class="eyebrow">03 / CONTINUITY</p><h2 id="history-heading">A visible trail of judgment.</h2></div><span id="round-count">0 recorded rounds</span></div><div id="history"></div></section>
+    <aside class="storage"><div><h2>Your review stays with you.</h2><p>Nothing is saved automatically. Export before closing. Imports replace this page’s current review after confirmation; recorded rounds remain editable in the exported file and are not authenticated approvals.</p></div><div class="storage-actions"><button id="export">Export review JSON</button><button id="backup">Show JSON backup</button><label class="file-label">Import review JSON<input id="import" type="file" accept=".json,application/json"></label></div></aside>
+    <label id="backup-panel" hidden>JSON backup — copy into a private .json file<textarea id="backup-text" rows="8" readonly></textarea></label>
+    <p id="message" role="status" aria-live="polite"></p>
+  </main>
+  <footer>Built for Second_Brain’s human-led creative practice. Open Brain by <a href="https://natebjones.com" target="_blank" rel="noreferrer">Nate B. Jones</a> · <a href="https://substack.com/@natesnewsletter" target="_blank" rel="noreferrer">Practical systems and writing</a></footer>
+</body>
+</html>
