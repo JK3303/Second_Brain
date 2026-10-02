@@ -63,7 +63,9 @@ environment: an invitation and revision preserving event facts; a synthetic prod
 edit preserving features and visible damage; and a presentation revision preserving
 numbers and qualifications. Inspect both initial and revised outputs. Missing tools
 leave the corresponding demonstration incomplete, rather than borrowing another
-environment's evidence. Live demonstrations remain pending for this draft release.
+environment's evidence. The prior candidate completed explicit-load Windows Codex demonstrations; those
+results do not establish recipient-client adoption or creative performance of the
+composition amendment. The amendment received contract and packaging review only.
 
 ## Troubleshooting
 

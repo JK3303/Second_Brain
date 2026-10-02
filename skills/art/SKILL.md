@@ -30,7 +30,8 @@ accounts and destinations; capability availability does not prove access or allo
 Do not silently change medium or provider to evade a limitation. Explain a missing
 capability and continue only independent work that still serves the request.
 
-For critique or consequential revision, read [critique](references/critique.md).
+For critique, consequential composition exploration or revision, or historical
+adaptation, read [critique](references/critique.md).
 For accepted references, source-bound text, product edits, or exact typography, read
 [fidelity](references/fidelity.md). For recurring covers or a visual collection, read
 [series design](references/series.md). For production assets and delivery, read
