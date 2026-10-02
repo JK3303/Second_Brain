@@ -2,8 +2,8 @@
   "schema_version": 1,
   "release": "coordinated-art-1.3.0",
   "package_version": "1.3.0",
-  "source_revision": "490dd7f051b1c31862fd1ddcf27cb96976cdcc26",
-  "source_status": "candidate-pending-core-merge",
+  "source_revision": "c8d45ec0ba9f629ee9b9c6ea58c6a04a3e007a16",
+  "source_status": "landed",
   "entrypoint": "skills/art/SKILL.md",
   "files": [
     {
