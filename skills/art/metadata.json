@@ -1,0 +1,27 @@
+{
+  "name": "Art: coherent creative practice and verified production",
+  "description": "Create, interpret, critique, and revise artistic work while preserving source fidelity and verifying production and delivery.",
+  "category": "skills",
+  "author": {
+    "name": "Robert Kuhne",
+    "github": "rbtkhn"
+  },
+  "version": "1.3.0",
+  "requires": {
+    "open_brain": true,
+    "services": [],
+    "tools": [
+      "AI client with reusable skill support"
+    ]
+  },
+  "tags": [
+    "art",
+    "creative-practice",
+    "revision",
+    "production"
+  ],
+  "difficulty": "beginner",
+  "estimated_time": "10 minutes",
+  "created": "2026-10-02",
+  "updated": "2026-10-02"
+}
