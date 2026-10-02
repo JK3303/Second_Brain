@@ -10,11 +10,15 @@ from prose, rewrites decisions, or declares them invalid. This complements
 Second_Brain's project boundaries and decision states without requiring a
 database or another contribution.
 
-## Requirements
+## Prerequisites
 
-An Open Brain / Second_Brain project and Python 3.11+, standard library only.
-Store project maps and snapshots according to the project's privacy boundary.
-No source text is included in output; paths and rationales can still be sensitive.
+1. An Open Brain / Second_Brain project.
+2. Python 3.11+, standard library only.
+3. A dependency map, and storage for baselines that respects the project's
+   privacy boundary.
+
+No source text is included in output; paths and rationales can still be
+sensitive.
 
 ## 1. Declare the dependency map
 
@@ -65,7 +69,7 @@ Several changed sources can independently trigger the same artifact.
 Create a new baseline only after accounting for the changes; comparison never
 replaces the previous one automatically.
 
-## Limits and verification
+## Expected outcome, limits, and verification
 
 The graph is only as complete as the declared relationships. Byte changes may
 be trivial; the report cannot judge significance, truth, approval, or quality.
