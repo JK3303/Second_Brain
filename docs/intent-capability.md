@@ -47,7 +47,7 @@ another person's state. Reads of missing state remain unavailable or unaccepted.
 Existing attributed confirmations remain in their original document.
 
 A stale revision/digest, changed workspace, linked path, or invalid history must
-be investigated before retrying. An interrupted portable write exposes pending
+be investigated before retrying. An interrupted write exposes pending
 state and refuses acceptance. After inspection and explicit owner authorization,
 recover by revising from the newly read revision and digest. A leftover lock
 requires verifying no writer is active before separately authorized removal.
@@ -55,7 +55,9 @@ Do not restore acceptance from a backup or clear a pending flag manually.
 
 Mira Core retains its existing private attention backend and its stricter entry
 format. Its existing `mira-attention` commands remain supported. A revision pauses
-preparation; accepting intent never resumes it. Other adapters do not install a
+preparation; accepting intent never resumes it. Core commits revocation and
+completion as separate revision transitions; always reread the current revision
+rather than assuming an increment of one. Other adapters do not install a
 preparation loop. Capability parity is established by the shared conformance
 suite, not by adopting identical personal goals or operating systems.
 

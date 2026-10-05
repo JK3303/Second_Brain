@@ -60,7 +60,7 @@ def test_lifecycle_and_stale_writes(store):
     assert store.context()["intent"]["accepted"]
     with pytest.raises(ValueError):
         store.change(stale)
-    changed = TEXT.replace("Understand", "Understand café 中文") + "\n"
+    changed = TEXT.replace("Understand", "Understand cafÃ© ä¸­æ–‡") + "\n"
     store.change(packet(store, "intent-revise", changed))
     current = store.context()
     assert current["intent"]["text"] == changed
@@ -105,7 +105,7 @@ def test_missing_context_does_not_create_state(tmp_path):
 def test_freeform_confirmations_preserved(tmp_path):
     repo = tmp_path / "workspace"
     repo.mkdir()
-    raw = '# Confirmed direction\r\n\r\n**Owner:** Fictional person.\r\n中文 café\r\n'.encode()
+    raw = '# Confirmed direction\r\n\r\n**Owner:** Fictional person.\r\nä¸­æ–‡ cafÃ©\r\n'.encode()
     document = repo / "INTENT.md"
     document.write_bytes(raw)
     value = engine.Store(repo, tmp_path / "state", document)
@@ -133,27 +133,55 @@ def test_workspace_binding_and_private_boundary(tmp_path):
         engine.Store(repo, repo / "state")
 
 
-def test_interrupted_revision_fails_closed(tmp_path, monkeypatch):
-    repo = tmp_path / "workspace"
-    repo.mkdir()
-    value = engine.Store(repo, tmp_path / "state")
-    value.change(packet(value, "intent-revise", TEXT))
-    value.change(packet(value, "intent-accept"))
-    original = engine.atomic
-    def fail_document(path, raw):
-        if path == value.document:
-            raise OSError("simulated interruption")
-        return original(path, raw)
-    monkeypatch.setattr(engine, "atomic", fail_document)
+@pytest.mark.parametrize("same_bytes", [True, False])
+@pytest.mark.parametrize("failure_point", ["before-replace", "after-replace"])
+def test_interrupted_revision_fails_closed(store, monkeypatch, same_bytes, failure_point):
+    store.change(packet(store, "intent-accept"))
+    core = isinstance(store, intent.CoreAdapter)
+    if core:
+        store.store.change(packet(store, "resume"))
+    text = store.context()["intent"]["text"]
+    candidate = text if same_bytes else text + "\n"
+    stale = packet(store, "intent-revise", candidate)
+    if core:
+        backend = store.store
+        original = backend.replace_intent_file
+        def fail_document(path, raw):
+            if path == backend.root / "intent.md":
+                if failure_point == "after-replace":
+                    original(path, raw)
+                raise OSError("simulated interruption")
+            return original(path, raw)
+        monkeypatch.setattr(backend, "replace_intent_file", fail_document)
+    else:
+        original = engine.atomic
+        def fail_document(path, raw):
+            if path == store.document:
+                if failure_point == "after-replace":
+                    original(path, raw)
+                raise OSError("simulated interruption")
+            return original(path, raw)
+        monkeypatch.setattr(engine, "atomic", fail_document)
     with pytest.raises(OSError):
-        value.change(packet(value, "intent-revise", TEXT + "\n"))
-    assert value.context()["pending"]
-    assert not value.context()["intent"]["accepted"]
+        store.change(stale)
+    current = store.context()
+    assert current["pending"]
+    assert not current["intent"]["accepted"]
+    if core:
+        assert current["paused"]
+        with pytest.raises(ValueError):
+            store.store.change(packet(store, "resume"))
     with pytest.raises(ValueError):
-        value.change(packet(value, "intent-accept"))
-    monkeypatch.setattr(engine, "atomic", original)
-    value.change(packet(value, "intent-revise", TEXT + "\n"))
-    assert not value.context()["pending"]
+        store.change(packet(store, "intent-accept"))
+    monkeypatch.undo()
+    with pytest.raises(ValueError):
+        store.change(stale)
+    store.change(packet(store, "intent-revise", candidate))
+    assert not store.context()["pending"]
+    store.change(packet(store, "intent-accept"))
+    assert store.context()["intent"]["accepted"]
+    if core:
+        assert store.context()["paused"]
 
 
 def test_write_guard_before_any_state_creation(tmp_path):
