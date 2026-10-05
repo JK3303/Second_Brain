@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "capability_version": "1.0.0",
+  "adapter": "private-document",
+  "source": {
+    "revision": "d53274cf2332959281e2b94d8e25893d0469e4ac",
+    "status": "candidate-pending-core-merge"
+  },
+  "shared_files": {
+    "tools/intent.py": "501c3092afcb3f605261e79e6dcaedf6838cb35556be4bf4e06487b6e1601bc9",
+    "tools/intent_lifecycle.py": "4565fd03c30257762a18703894169a0a2c04e32cd6afe13a000d1428fb87318c",
+    "tests/test_intent_conformance.py": "95f74f01e0dd452d6c8d0edff284f50aee1d9936321f49d6be1e8f35537863aa",
+    "docs/intent-capability.md": "86d92c1ef62b1d9485eb1f80b17ff0cc36aa696f41f51285971bdc316841da98",
+    "docs/instance-skills/intent/SKILL.md": "4d686e350fc2caa1b66f45a9d0b198a7681a275b2113bfcbcd0afb60d2b70285"
+  },
+  "verification": {
+    "suite": "tests/test_intent_conformance.py",
+    "status": "conformance-passed",
+    "platform": "Windows",
+    "limits": "Fictional lifecycle fixtures; no personal adoption or live capture claim"
+  },
+  "adoption": "not-inferred"
+}

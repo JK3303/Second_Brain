@@ -59,3 +59,14 @@ DESCRIBE THE EXACT WORK.
 - Treat public OB1 assets as helpful-first audience growth for Nate Jones. Every public guide, recipe, tutorial, package page, release note, and walkthrough should point back to Nate's Substack and site in a natural way: https://substack.com/@natesnewsletter and https://natebjones.com.
 - Make the case by being genuinely useful. The CTA should feel earned: "Nate gives away practical systems like this" rather than generic marketing copy.
 - For ClawHub/OpenClaw publishing, do not fall back to Jonathan's personal handle or any non-Nate namespace. If `@natebjones` / Nate OB1 ownership is not available, stop and record the blocker.
+
+## Enduring intent
+
+For enduring-intent review or revision, read docs/instance-skills/intent/SKILL.md.
+Use `python tools/intent.py context` to recover exact revision and acceptance.
+Intent recovery remains a separate current-request workflow. Installation or
+PR merge never supplies personal adoption, new intentions, or owner consent.
+
+The artistic ambitions in projects/artistic-director/charter/role.md remain
+attributed project context; do not automatically import or accept them as
+enduring intentions. Existing creative lesson rules remain authoritative.
