@@ -3,13 +3,13 @@
   "capability_version": "1.0.0",
   "adapter": "private-document",
   "source": {
-    "revision": "8768ef38ccee8f6c775d7236d8b77d541295ac37",
+    "revision": "2763f73fe8677182e04888500a1d722aee5b0dd3",
     "status": "candidate-pending-core-merge"
   },
   "shared_files": {
     "tools/intent.py": "501c3092afcb3f605261e79e6dcaedf6838cb35556be4bf4e06487b6e1601bc9",
-    "tools/intent_lifecycle.py": "4565fd03c30257762a18703894169a0a2c04e32cd6afe13a000d1428fb87318c",
-    "tests/test_intent_conformance.py": "c1249929249a85805349cb0f05f4c6c476a1bb05fdcf0ccbe2085e41ce7750aa",
+    "tools/intent_lifecycle.py": "6148b8426f80b78c350a5575764f8a94394b7b9119c756c65a58e224a4e78e61",
+    "tests/test_intent_conformance.py": "738a989080fc0fcc37d4e8376eaabfc4d3c5baa5aa5c99c4d13f0b013ba551f6",
     "docs/intent-capability.md": "1b4af917661e983b746cd7846c26a84eecc72ebf2851ac14c4360d0c9d9176e0",
     "docs/instance-skills/intent/SKILL.md": "4d686e350fc2caa1b66f45a9d0b198a7681a275b2113bfcbcd0afb60d2b70285"
   },

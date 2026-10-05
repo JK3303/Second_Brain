@@ -126,7 +126,9 @@ class Store:
         return result
 
     def history(self):
-        meta = self.metadata()
+        return self.checked_history(self.metadata())
+
+    def checked_history(self, meta):
         records = []
         for row in meta["history"]:
             sha = row["sha256"]
@@ -166,7 +168,9 @@ class Store:
             candidate = packet["text"].encode("utf-8")
             validate(candidate)
         with self.lock():
-            meta, old = self.metadata(), self.raw()
+            meta = self.metadata()
+            self.checked_history(meta)
+            old = self.raw()
             sha = digest(old) if old is not None else None
             if type(packet.get("revision")) is not int or packet["revision"] != meta["revision"]:
                 raise IntentError("Stale revision")

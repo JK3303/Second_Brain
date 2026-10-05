@@ -228,3 +228,34 @@ def test_core_existing_acceptance_not_migrated(store):
     reopened = intent.CoreAdapter(ROOT, store.store.root)
     assert reopened.context() == before
     assert (store.store.root / "intent.md").read_bytes() == raw
+
+
+@pytest.mark.parametrize("adapter", ["private", "repository"])
+@pytest.mark.parametrize("damage", ["corrupt", "missing"])
+@pytest.mark.parametrize("operation", ["intent-accept", "intent-revise"])
+def test_damaged_earlier_history_refuses_mutation(tmp_path, adapter, damage, operation):
+    repo = tmp_path / "workspace"
+    repo.mkdir()
+    document = repo / "INTENT.md" if adapter == "repository" else None
+    store = engine.Store(repo, tmp_path / "state", document)
+    store.change(packet(store, "intent-revise", TEXT))
+    first_sha = store.context()["intent"]["sha256"]
+    second = TEXT + "\n"
+    store.change(packet(store, "intent-revise", second))
+    snapshot = store.root / "intent-history" / (first_sha + ".md")
+    if damage == "missing":
+        snapshot.unlink()
+    else:
+        snapshot.write_bytes(b"Fictional corrupt history")
+    before_meta = store.meta.read_bytes()
+    before_document = store.document.read_bytes()
+    before_files = {p.relative_to(store.root): p.read_bytes()
+                    for p in store.root.rglob("*") if p.is_file()}
+    request = packet(store, operation, second + "\n" if operation == "intent-revise" else None)
+    with pytest.raises((ValueError, OSError)):
+        store.change(request)
+    assert store.meta.read_bytes() == before_meta
+    assert store.document.read_bytes() == before_document
+    assert {p.relative_to(store.root): p.read_bytes()
+            for p in store.root.rglob("*") if p.is_file()} == before_files
+    assert not store.context()["intent"]["accepted"]
