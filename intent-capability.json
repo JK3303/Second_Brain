@@ -4,7 +4,7 @@
   "adapter": "private-document",
   "source": {
     "revision": "2763f73fe8677182e04888500a1d722aee5b0dd3",
-    "status": "candidate-pending-core-merge"
+    "status": "landed-core-commit"
   },
   "shared_files": {
     "tools/intent.py": "501c3092afcb3f605261e79e6dcaedf6838cb35556be4bf4e06487b6e1601bc9",
