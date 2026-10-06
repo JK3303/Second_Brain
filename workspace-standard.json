@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "standard": {
+    "name": "personal-workspace",
+    "version": "0.2.0",
+    "source_sha256": "7fd9de91ca309522b69c339d1a231b0018a6f9e5c29e2b1b77e762ce51751c82",
+    "source_revision": "e2b99ad4a277839085507d5a1a1d7bb8d812b83b",
+    "status": "draft",
+    "copy": "docs/personal-workspace-standard.md",
+    "upstream_source_sha256": "9c387535375f464da3887c24eaf27f77521a48927f1e8e4483111b5ba74c2d47",
+    "distribution_variant": "public attribution generalized; behavioral rules unchanged"
+  },
+  "adoption": {
+    "status": "proposed",
+    "reviewed_on": null
+  },
+  "local_adaptations": [
+    {
+      "topic": "working authority",
+      "path": "AGENTS.md",
+      "reason": "Preserve existing repository instructions and action permissions"
+    },
+    {
+      "topic": "project boundaries",
+      "path": "docs/second-brain/project-membranes.md",
+      "reason": "Preserve project-local material and explicit exchange authority"
+    },
+    {
+      "topic": "decision authority",
+      "path": "docs/second-brain/decision-states.md",
+      "reason": "Preserve approval, hold, rejection, and supersession states"
+    },
+    {
+      "topic": "creative feedback",
+      "path": "docs/second-brain/calibration-loop.md",
+      "reason": "Preserve exact critique and human creative direction"
+    },
+    {
+      "topic": "reusable lessons",
+      "path": "docs/second-brain/lesson-promotion.md",
+      "reason": "Require human acceptance before promotion"
+    }
+  ],
+  "verification": {
+    "status": "private-candidate-verified",
+    "source_status": "landed",
+    "evidence": "Private checks: upstream and variant digests, JSON, local references, preserved eight rules, generalized personal attribution. Hosted checks pending.",
+    "exchange_contract": {
+      "status": "review-draft",
+      "copy": "docs/personal-workspace-exchange-contract.md",
+      "source_sha256": "b13d525f7b75d5bf3dacfbc7c4cb76aa18dd2ed8f0bb6cebdc9e2815a2058fc9"
+    }
+  }
+}
