@@ -242,6 +242,7 @@ def test_damaged_earlier_history_refuses_mutation(tmp_path, adapter, damage, ope
     first_sha = store.context()["intent"]["sha256"]
     second = TEXT + "\n"
     store.change(packet(store, "intent-revise", second))
+    request = packet(store, operation, second + "\n" if operation == "intent-revise" else None)
     snapshot = store.root / "intent-history" / (first_sha + ".md")
     if damage == "missing":
         snapshot.unlink()
@@ -251,11 +252,46 @@ def test_damaged_earlier_history_refuses_mutation(tmp_path, adapter, damage, ope
     before_document = store.document.read_bytes()
     before_files = {p.relative_to(store.root): p.read_bytes()
                     for p in store.root.rglob("*") if p.is_file()}
-    request = packet(store, operation, second + "\n" if operation == "intent-revise" else None)
     with pytest.raises((ValueError, OSError)):
         store.change(request)
     assert store.meta.read_bytes() == before_meta
     assert store.document.read_bytes() == before_document
     assert {p.relative_to(store.root): p.read_bytes()
             for p in store.root.rglob("*") if p.is_file()} == before_files
-    assert not store.context()["intent"]["accepted"]
+    assert store.context()["availability"] == "unavailable"
+    assert store.context()["intent"] is None
+
+
+@pytest.mark.parametrize("adapter", ["private", "repository"])
+@pytest.mark.parametrize("damage", ["corrupt", "missing"])
+@pytest.mark.parametrize("snapshot_version", ["earlier", "current"])
+def test_accepted_context_refuses_damaged_history(tmp_path, adapter, damage, snapshot_version):
+    repo = tmp_path / "workspace"
+    repo.mkdir()
+    document = repo / "INTENT.md" if adapter == "repository" else None
+    store = engine.Store(repo, tmp_path / "state", document)
+    store.change(packet(store, "intent-revise", TEXT))
+    first_sha = store.context()["intent"]["sha256"]
+    store.change(packet(store, "intent-revise", TEXT + "\n"))
+    store.change(packet(store, "intent-accept"))
+    accepted = store.context()
+    assert accepted["intent"]["accepted"]
+    sha = first_sha if snapshot_version == "earlier" else accepted["intent"]["sha256"]
+    snapshot = store.root / "intent-history" / (sha + ".md")
+    if damage == "missing":
+        snapshot.unlink()
+    else:
+        snapshot.write_bytes(b"Fictional corrupt history")
+    before_meta = store.meta.read_bytes()
+    before_document = store.document.read_bytes()
+    before_files = {p.relative_to(store.root): p.read_bytes()
+                    for p in store.root.rglob("*") if p.is_file()}
+    current = store.context()
+    assert current["availability"] == "unavailable"
+    assert current["intent"] is None
+    assert current["mutation_performed"] is False
+    assert "integrity" in current["reason"]
+    assert store.meta.read_bytes() == before_meta
+    assert store.document.read_bytes() == before_document
+    assert {p.relative_to(store.root): p.read_bytes()
+            for p in store.root.rglob("*") if p.is_file()} == before_files

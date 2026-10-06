@@ -114,7 +114,9 @@ class Store:
                   "availability": "unavailable", "revision": None, "intent": None,
                   "mutation_performed": False}
         try:
-            meta, raw = self.metadata(), self.raw()
+            meta = self.metadata()
+            self.checked_history(meta)
+            raw = self.raw()
             result.update(revision=meta["revision"], pending=meta["pending"])
             if raw is not None:
                 sha = digest(raw)
