@@ -1,0 +1,11 @@
+{
+  "name": "Project Change Impact",
+  "description": "Trace changed source files through human-declared decisions and deliverables with explained review paths.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "tools": ["Python 3.11+"], "services": []},
+  "tags": ["change-impact", "provenance", "project-memory"],
+  "difficulty": "intermediate",
+  "estimated_time": "15 minutes"
+}

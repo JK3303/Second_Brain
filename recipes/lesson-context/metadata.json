@@ -1,0 +1,11 @@
+{
+  "name": "Project Lesson Context",
+  "description": "Retrieve scoped creative lessons, rejected approaches, and unresolved questions from existing project Markdown.",
+  "category": "recipes",
+  "author": {"name": "Mira", "github": "mira-builds"},
+  "version": "1.0.0",
+  "requires": {"open_brain": true, "tools": ["Python 3.11+"], "services": []},
+  "tags": ["creative-memory", "retrieval", "local-first"],
+  "difficulty": "beginner",
+  "estimated_time": "5 minutes"
+}
