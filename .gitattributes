@@ -1,7 +1,0 @@
-
-# Preserve hash-bound Intent capability bytes.
-tools/intent.py -text whitespace=cr-at-eol
-tools/intent_lifecycle.py -text whitespace=cr-at-eol
-tests/test_intent_conformance.py -text whitespace=cr-at-eol
-docs/intent-capability.md -text whitespace=cr-at-eol
-docs/instance-skills/intent/SKILL.md -text whitespace=cr-at-eol

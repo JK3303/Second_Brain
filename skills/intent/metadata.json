@@ -1,0 +1,24 @@
+{
+  "name": "Intent",
+  "description": "Owner-approved enduring intent with private storage, preserved history and exact-digest acceptance.",
+  "category": "skills",
+  "author": {
+    "name": "Mira",
+    "github": "mira-builds"
+  },
+  "version": "1.0.1",
+  "requires": {
+    "open_brain": true,
+    "tools": [
+      "Python 3.10 or newer",
+      "pytest 9.1.1 for fictional conformance tests"
+    ]
+  },
+  "tags": [
+    "intent",
+    "privacy",
+    "owner-approval"
+  ],
+  "difficulty": "intermediate",
+  "estimated_time": "15 minutes"
+}
