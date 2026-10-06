@@ -20,7 +20,7 @@ An identity approach where the product's technology is not signaled through visu
 
 ## Intent-based navigation
 
-Organizing a website or brand experience around the customer's purpose rather than the product taxonomy. Instead of leading with product categories (rings, earrings, necklaces), lead with the customer's reason for being there (engagement, anniversary, milestone, self-gift). Validated in the Grace Gems Phase 2 exploration.
+Organizing a website or brand experience around the customer's purpose rather than the product taxonomy. Instead of leading with product categories, lead with the customer's reason for being there (engagement, anniversary, milestone, self-gift). Validated in one rebranding cohort.
 
 ## Story-first layout
 

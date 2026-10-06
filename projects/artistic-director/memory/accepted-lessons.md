@@ -14,7 +14,7 @@ Human-approved reusable lessons that guide future creative work. Each lesson inc
 
 **Rule:** When a brand sells personalized or custom products, organize the entry experience around the customer's purpose — not the product taxonomy. Ask "what moment are you marking?" before showing product categories. Intent-based navigation turns browsing into self-reflection, which primes custom inquiries and emotional connection with the brand.
 
-**Evidence:** Grace Gems Phase 2. The "What moment are you marking?" section with occasion tiles (Engagement, Anniversary, Milestone, Self-gift) was validated by the Human AD as the strongest element of the homepage wireframe. It resonated because it makes the customer's story the starting point rather than stone type or product category.
+**Evidence:** One rebranding cohort. An occasion-prompt section — "what moment are you marking?" with tiles for engagement, anniversary, milestone, and self-gift — was validated by the Human AD as the strongest element of a homepage wireframe. It resonated because it makes the customer's story the starting point rather than a material or a product category.
 
 **Applies when:** The brand's value proposition is personal meaning, customization, or occasion-driven purchasing. Especially relevant for jewelry, bespoke goods, and any product where the "why" matters more than the "what."
 
