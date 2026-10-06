@@ -38,15 +38,19 @@ question, not a decision.
 
 ## Why these are public
 
-Repository-level methodological decisions are generic method, so they sit on the
-public side of the boundary described in
-[project membranes](../second-brain/project-membranes.md) — alongside reusable methods
-and explicitly accepted lessons.
+[`authority-boundaries.md`](../../projects/artistic-director/methods/rebranding/authority-boundaries.md)
+splits material across two surfaces. This repository holds generic methods, blank
+templates, automation candidates, and sanitized accepted lessons. An approved private
+surface holds client research, client decisions and preferences, assets, costs and
+commercial evidence, operational correspondence, and client-specific lessons.
 
-Client decisions, preferences, commercial evidence, and engagement-specific material
-do not. Those belong on an approved private surface and must not be recorded here.
-Project-local material does not become repository-level simply because a decision
-touched it.
+A repository-level decision about this workspace's own method is generic method, so it
+belongs here. A decision about a client's brand does not, and must not be recorded in
+this folder even in summary.
+
+The promotion rule in [project membranes](../second-brain/project-membranes.md) still
+applies: project-local material does not become repository-level simply because a
+decision touched it.
 
 ## Records
 
