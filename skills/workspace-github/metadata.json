@@ -1,0 +1,25 @@
+{
+  "name": "Workspace GitHub",
+  "description": "Scoped GitHub review and publication workflow with a read-only Git candidate inspector.",
+  "category": "skills",
+  "author": {
+    "name": "Mira",
+    "github": "mira-builds"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "tools": [
+      "Git",
+      "Python 3.9 or newer",
+      "Authenticated GitHub CLI or provider for remote operations"
+    ]
+  },
+  "tags": [
+    "github",
+    "review",
+    "validation"
+  ],
+  "difficulty": "intermediate",
+  "estimated_time": "10 minutes"
+}
