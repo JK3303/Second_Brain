@@ -54,7 +54,12 @@ Exactly one.
 
 > Verbatim. Do not paraphrase into brand language, do not tidy, do not summarize. If a phrase is unclear, record it as said and add a clarification note separately.
 
-> [verbatim]
+Record the words in a fenced block so spacing, line breaks, and punctuation survive
+exactly as spoken:
+
+```text
+[the decision-maker's words, exactly as said]
+```
 
 **Clarifications sought and answers given:**
 
