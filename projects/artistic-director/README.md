@@ -18,6 +18,9 @@ Grace Gems is an internal creative exploration. "Your Stone, Your Story" is a le
 |------|---------|
 | `charter/` | Role definition, working agreement, and authority boundaries |
 | `ai/` | System instructions, collaboration loop, critique rubric, calibration exercises |
+| `methods/` | Reusable, client-neutral engagement methods (see `methods/rebranding/`) |
+| `templates/` | Blank working documents for those methods (see `templates/rebranding/`) |
+| `automation/` | Automation candidates and the review gate they must pass |
 | `memory/` | Role principles, creative vocabulary, accepted and rejected lessons, open questions |
 | `references/` | Curated reference materials with rights and attribution tracking |
 | `practice/` | Creative laboratory: briefs, concepts, critiques, experiments |
