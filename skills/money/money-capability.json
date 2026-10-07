@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "workspace": "jk",
+  "foundation": {
+    "distribution": "public-review-candidate",
+    "path": "docs/instance-skills/money",
+    "landed_revision": null,
+    "status": "candidate-pending-source-landing",
+    "sha256": {
+      ".gitattributes": "210d6c0877347e8210e69c9cd6dc20046800d141c8e0428c02c1639ebd91947c",
+      "references/bookkeeping-basis.md": "6fa8fabc3cb4e21f9064bb85f7dafa0cb1fdadfd469dab63ef1516b6771c74c8",
+      "references/operating-finance.md": "c38b51451c39f96ed045fd7614baaa1b9b7e14b96cac0adb948b5a17aceede67",
+      "references/opportunity-assessment.md": "b21239153842e8c71a0172c0bb9b2b34820799ee63fc36c537e4327cfad4b30b",
+      "references/review-cases.md": "4d78ac4bc2b661e9349e0f18d7b57369ce8fe943d585efa5ba715bce85a65f89",
+      "references/spreadsheet-practice.md": "2e0d57960d5fe0c54310a8245f331d4ba7d8bf8756484933e0aef2ec27a43456",
+      "references/utility-practice.md": "aa3898d82abd3a65a031f0516406696108d213cc2026a6f0d1ba7c5b7b02022c",
+      "references/workspace-adaptation.md": "c125e254bf868693e5a14061af4436ee05cc23c789e760cb11d5125eae5c15a6",
+      "scripts/money_tools.py": "9772931ec3a8203ba7978ef2933b1aef9d697f7aa6aa73bcf6b856de3a1c106d",
+      "SKILL.md": "3a406de78e26c8e354979333484da02ec5580955b9eb50d44333786965412075",
+      "tests/test_money_tools.py": "cdedf315eb5dc5f74f07a07564afecc5c6b93dfbb14bdb1e9f1037d9ccc5e58c",
+      "THIRD_PARTY_NOTICES.md": "0cb396cc64626b8f1f181ce552f47dc8442742b0592a34742474fc5ebbc57c0d"
+    },
+    "package_sha256": "e0d16bdc651ce739c9fc8699610b14abd84b2bbccb7d636b1188516be6a01fa7"
+  },
+  "adoption": {
+    "status": "pending-owner-review",
+    "owner": "Repository owner",
+    "evidence": null
+  },
+  "readiness": {
+    "package": "passed",
+    "operational": "Use only capabilities with local execution evidence; Sheets editing remains unavailable."
+  },
+  "capabilities": {
+    "contract": {
+      "status": "passed",
+      "date": "2026-10-06",
+      "evidence": "Prepared candidate: exact-base patch application, payload and manifest hashes, preserved base instructions, and local reference validation."
+    },
+    "utilities": {
+      "status": "unverified",
+      "date": null,
+      "test_count": null,
+      "tested_utility_sha256": null,
+      "operations": [
+        "import_preview",
+        "identity_review",
+        "reconcile",
+        "comparable_calculations"
+      ],
+      "environment": "Receiving runtime unverified; matching source test evidence does not establish local tool access."
+    },
+    "xlsx": {
+      "status": "unverified",
+      "date": null,
+      "reason": "Receiving workspace runtime has not been exercised."
+    },
+    "google_sheets": {
+      "status": "unverified",
+      "date": null,
+      "reason": "No authorized fictional native Sheets test destination; no external writes performed."
+    }
+  },
+  "limits": [
+    "Capability metadata is evidence, not owner consent.",
+    "Source-package execution cannot establish receiving workspace tool access or performance.",
+    "Native Excel application control is outside v1."
+  ]
+}

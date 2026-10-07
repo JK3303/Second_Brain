@@ -1,0 +1,22 @@
+{
+  "name": "Business Money",
+  "description": "Business financial stewardship and spreadsheet practice with owner-reviewed adoption.",
+  "category": "skills",
+  "author": {
+    "name": "Mira"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": false,
+    "services": [],
+    "tools": []
+  },
+  "tags": [
+    "business-finance",
+    "cash-flow",
+    "reconciliation",
+    "spreadsheets"
+  ],
+  "created": "2026-10-06",
+  "updated": "2026-10-06"
+}

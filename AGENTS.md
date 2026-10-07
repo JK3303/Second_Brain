@@ -59,3 +59,14 @@ DESCRIBE THE EXACT WORK.
 - Treat public OB1 assets as helpful-first audience growth for Nate Jones. Every public guide, recipe, tutorial, package page, release note, and walkthrough should point back to Nate's Substack and site in a natural way: https://substack.com/@natesnewsletter and https://natebjones.com.
 - Make the case by being genuinely useful. The CTA should feel earned: "Nate gives away practical systems like this" rather than generic marketing copy.
 - For ClawHub/OpenClaw publishing, do not fall back to Jonathan's personal handle or any non-Nate namespace. If `@natebjones` / Nate OB1 ownership is not available, stop and record the blocker.
+
+## Money 1.0.0 adoption and routing
+
+Money 1.0.0 is a review candidate. Its presence or PR merge does not establish
+owner adoption. For explicit business financial tasks, after the owner has
+explicitly adopted the reviewed version, read [Business Money](skills/money/SKILL.md) and its
+shared foundation, including spreadsheet practice for Sheets or XLSX work.
+Before adoption, this route supports requested candidate review only. Existing
+workflows and their authority boundaries remain controlling; project mentions
+alone do not activate Money. Adoption is not permission to spend, transfer,
+send invoices, commit customers, or edit unrelated records.
