@@ -24,3 +24,11 @@ writes Open Brain data and requires no local MCP server. A working Open Brain
 installation is the contribution's host context, not a hidden database dependency
 of the Git inspector. No validated publisher or hook is bundled. Preserve
 existing recovery controls and obtain a bounded decision if none exists.
+
+For commit preparation, disclose the outgoing stack and separately resolve
+unrelated staged work. Before a dirty merge or rollback, preserve original bytes
+and existence across all affected files and verify stopped competing execution.
+Use the shared helper's content fingerprint for validation reuse and its Git
+context fingerprint for fresh action context; neither supplies authority.
+Remote and hosted verification use the exact submitted SHA. A failed or missing
+required job stays visible; do not restart publishers/watchers or waive gates.

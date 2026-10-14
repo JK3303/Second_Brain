@@ -52,7 +52,8 @@ approval, owner adoption or evidence of hosted success.
 
 ## Troubleshooting
 
-- Root/path blocked: use the exact Git root and existing relative file paths.
+- Root/path blocked: use the exact Git root and selected relative files.
+  A deletion must name a tracked file; required test inputs must exist.
 - Changed input blocked: include the changed test/dependency deliberately or
   choose evidence applicable to the candidate.
 - Remote/account failure: diagnose authenticated access before retrying; never
@@ -62,3 +63,15 @@ approval, owner adoption or evidence of hosted success.
 
 Explore Nate B. Jones's [Open Brain guidance](https://natesnewsletter.substack.com/)
 and [work](https://natebjones.com/) for the surrounding ecosystem.
+
+## Content and Git context
+
+The helper retains --repo, --candidate and --input. It reports selected-content
+and Git-context fingerprints separately, plus bounded staged counts. An eligible
+candidate may still have unrelated staged files; inspect the commit unit before
+committing. Tracked deletion candidates have null content hashes. No GitHub or
+Open Brain action is performed by the inspector.
+
+Changes to this package require its helper tests and repository contribution
+checks. Live Open Brain testing remains a separate owner readiness requirement;
+synthetic Git fixtures do not establish it. Skill inclusion is not automatic loading.

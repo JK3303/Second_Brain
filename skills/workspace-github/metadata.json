@@ -6,7 +6,7 @@
     "name": "Mira",
     "github": "mira-builds"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "requires": {
     "open_brain": true,
     "tools": [
