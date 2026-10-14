@@ -11,8 +11,13 @@
     "distribution_variant": "public attribution generalized; behavioral rules unchanged"
   },
   "adoption": {
-    "status": "proposed",
-    "reviewed_on": null
+    "status": "adopted",
+    "reviewed_on": "2026-10-14",
+    "approved_by": "JK",
+    "reviewed_version": "0.2.0",
+    "reviewed_source_revision": "e2b99ad4a277839085507d5a1a1d7bb8d812b83b",
+    "scope": "All eight behavioural rules, as guidance within existing agreements and permissions. Excludes runtime 1.2.0 and capture mode; records-only use. Grants no permissions. Rule 6 does not displace the Linear requirement in AGENTS.md for issue-tied work. Rule 7 applies going forward and does not retroactively validate existing occurrences. Full scope and conditions in the decision record.",
+    "scope_record": "docs/decisions/workspace-standard-0-2-0.md"
   },
   "local_adaptations": [
     {
