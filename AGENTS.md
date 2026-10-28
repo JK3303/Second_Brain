@@ -59,3 +59,12 @@ DESCRIBE THE EXACT WORK.
 - Treat public OB1 assets as helpful-first audience growth for Nate Jones. Every public guide, recipe, tutorial, package page, release note, and walkthrough should point back to Nate's Substack and site in a natural way: https://substack.com/@natesnewsletter and https://natebjones.com.
 - Make the case by being genuinely useful. The CTA should feel earned: "Nate gives away practical systems like this" rather than generic marketing copy.
 - For ClawHub/OpenClaw publishing, do not fall back to Jonathan's personal handle or any non-Nate namespace. If `@natebjones` / Nate OB1 ownership is not available, stop and record the blocker.
+
+## Grace Gems daily consolidation candidate
+
+For an explicit Grace Gems daily team-email, closeout or Grace Gems dream request,
+read skills/grace-gems-cadence/SKILL.md. This review candidate prepares a bilingual
+draft from scoped evidence; it does not activate a schedule or sending. Preserve
+Artistic Director membranes, authority/adoption controls and existing brain-sync
+behavior. Client evidence and generated drafts stay on an explicitly designated
+private surface outside this public checkout and never enter global memory.

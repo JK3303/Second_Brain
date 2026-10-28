@@ -210,3 +210,12 @@ Open Brain was created by [Nate B. Jones](https://github.com/NateBJones). The up
 ## License
 
 [FSL-1.1-MIT](LICENSE.md)
+
+## Proposed Grace Gems daily team update
+
+Review [the daily consolidation method](docs/grace-gems-cadence.md) and
+[its skill](skills/grace-gems-cadence/SKILL.md). This candidate turns already-done
+work into a short bilingual email draft with explicit evidence and coverage gaps.
+No scheduler, email sending, client decision, memory promotion or adoption is
+activated by merge. Operational evidence stays on a designated private surface,
+outside this public method repository.
