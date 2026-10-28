@@ -119,7 +119,6 @@ the same portable contract in every owner adapter.
 
 ## Portable contract
 
-
 `scripts/team_contributions.py` is the standalone implementation shared with the
 client adapters. `team-contribution-v1` contains `owner`, `project`, `date`,
 `timezone`, `audience: grace-gems-team`, `basis`, `coverage`, `sources`, `outcomes`
@@ -157,7 +156,6 @@ cross-outcome corrections fail closed. For earlier-day targets, reconcile in the
 owning record and export the corrected current-day claim with versioned sources;
 do not relabel yesterday's progress. Multiple conflicting replacement claims remain
 unresolved. Semantic reconciliation is agent work, not inferred by timestamps.
-
 
 ## Adoption, scheduling and sending
 
