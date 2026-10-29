@@ -1,5 +1,7 @@
 # Grace Gems coordinated cadence
 
+Follow the [shared Coffee/Dream contract](team-coffee-contract.md) for three-choice re-entry, action context, and verified team briefs.
+
 ```mermaid
 flowchart LR
   A[Reviewed owner contributions] --> B[Identity and correction checks]
@@ -111,7 +113,7 @@ python3 skills/grace-gems-cadence/tools/grace_gems_daily.py compose --input /pri
 
 Omit unavailable input files while keeping their expected owners. Export writes
 `current-contribution.json`; compose writes `current-team-email.md` and
-`current-evidence.json`. Output folders must be absolute and outside any Git
+`current-evidence.json` plus `current-team-brief.json`. Supply `--through-cutoff` with the actual inspected-source cutoff for morning re-entry. Output folders must be absolute and outside any Git
 checkout. Prior differing bytes remain in private `.history`; unchanged reruns
 add nothing. Invalid input preserves current output. File readback establishes
 local byte delivery only. The module `skills/grace-gems-cadence/tools/team_contributions.py` implements

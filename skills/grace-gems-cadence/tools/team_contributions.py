@@ -118,7 +118,9 @@ def validate(packet, business_date, timezone, project):
         sources[sid] = source
     seen = set()
     for row in packet["outcomes"]:
-        keys(row, {"id", "outcome_id", "artifact_id", "revision", "event_date", "category", "evidence", "delivery", "source_ids", "en", "zh", "uncertainty", "supersedes"}, {"share_url", "carry_forward"})
+        keys(row, {"id", "outcome_id", "artifact_id", "revision", "event_date", "category", "evidence", "delivery", "source_ids", "en", "zh", "uncertainty", "supersedes"}, {"share_url", "carry_forward", "action"})
+        if "action" in row:
+            validate_action(row["action"])
         for field in ("id", "outcome_id", "artifact_id", "revision"):
             token(row[field])
         if row["id"] in seen:
@@ -151,6 +153,25 @@ def validate(packet, business_date, timezone, project):
         if row.get("share_url"):
             url(row["share_url"])
     return deepcopy(packet)
+
+
+def validate_action(action):
+    keys(action, {"schema", "relevant_to", "request", "decision_maker", "commitment", "deadline", "state"})
+    if action["schema"] != "team-action-v1":
+        raise ValueError("Unsupported action context version")
+    if not isinstance(action["relevant_to"], list) or len(set(action["relevant_to"])) != len(action["relevant_to"]):
+        raise ValueError("Action participants must be unique")
+    for person in action["relevant_to"]:
+        if person not in {"mira", "hannah", "jon", "eric"}:
+            raise ValueError("Unknown action participant")
+    keys(action["request"], {"en", "zh"})
+    text(action["request"]["en"], "action request"); text(action["request"]["zh"], "action request")
+    if action["decision_maker"] not in {None, "mira", "hannah", "jon", "eric"}:
+        raise ValueError("Unknown decision maker")
+    if action["commitment"] not in {"proposed", "accepted", "unspecified"} or action["state"] not in {"open", "resolved", "superseded"}:
+        raise ValueError("Invalid action state or commitment")
+    if action["deadline"] is not None:
+        date.fromisoformat(action["deadline"])
 
 
 def compose(packets, *, business_date, timezone, project, expected_owners):
@@ -210,30 +231,114 @@ def compose(packets, *, business_date, timezone, project, expected_owners):
 
 
 def render(result):
-    lines = [f"Subject: Grace Gems daily update / 每日进展 — {result['date']}", "", "DRAFT — NOT SENT / 草稿 — 未发送", "", f"Business period / 业务日期: {result['date']} ({result['timezone']})", "", "Coverage / 来源范围"]
-    for row in result["coverage"]:
-        if row["sources"] is None:
-            lines.append(f"- {row['owner']}: contribution unavailable / 未收到贡献；不表示没有工作。")
-        else:
-            for source in sorted(row["sources"], key=lambda x: x["kind"]):
-                lines.append(f"- {row['owner']} / {source['kind']} [{source['status']}]: {source['en']} / {source['zh']}")
-    lines += ["", "Outcomes / 工作结果"]
-    for group in result["results"]:
-        lines.append(f"\n{group['outcome_id']} [{group['status']} / {'尚有分歧' if group['status'] == 'unresolved' else '已整合'}]")
-        for variant in group["variants"]:
+    """Human-facing brief; full provenance stays in the evidence JSON."""
+    lines = [f"Subject: Grace Gems daily update / 每日进展 — {result['date']}", "", "DRAFT — NOT SENT / 草稿 — 未发送", "", f"Business period / 业务日期: {result['date']} ({result['timezone']})"]
+    headings = [("decision", "Decisions needed / 待决事项"), ("blocker", "Blocked work / 受阻工作"),
+                ("progress", "Meaningful progress / 实质进展"), ("next", "Next actions / 下一步"),
+                ("working", "Work in progress / 进行中的工作")]
+    for category, heading in headings:
+        entries = [(g, v) for g in result["results"] for v in g["variants"]
+                   if v["outcome"]["category"] == category and not
+                   (category in {"decision", "blocker", "next"} and
+                    v["outcome"].get("action", {}).get("state") in {"resolved", "superseded"})]
+        if not entries:
+            continue
+        lines += ["", heading]
+        for group, variant in entries:
             row = variant["outcome"]
-            owners = ", ".join(p["owner"] for p in variant["provenance"])
-            lines += [f"- {row['category']} / {row['evidence']} ({owners}): {row['en']}", f"  {row['zh']}", f"  Delivery / 交付: {row['delivery']['state']} — {row['delivery']['destination']} ({row['delivery']['version']})", f"  Uncertainty / 不确定性: {row['uncertainty']}"]
+            lines += [f"- {row['en']}", f"  {row['zh']}"]
+            if group["status"] == "unresolved":
+                owners = ", ".join(p["owner"] for p in variant["provenance"])
+                lines.append(f"  Disagreement unresolved / 分歧未解决 ({owners})")
+            if row["evidence"] != "verified" and not (row["evidence"] == "proposed" and row.get("action", {}).get("commitment") == "proposed"):
+                lines.append("  " + {"reported": "Reported / 据报告", "proposed": "Proposed / 提议"}[row["evidence"]])
+            action = row.get("action")
+            if action:
+                maker = action["decision_maker"] or "Unspecified / 未指定"
+                commitment = {"proposed": "Proposed / 提议", "accepted": "Accepted / 已接受", "unspecified": "Unspecified / 未明确"}[action["commitment"]]
+                if action["request"] != {"en": row["en"], "zh": row["zh"]}:
+                    lines.append(f"  Action / 行动: {action['request']['en']} / {action['request']['zh']}")
+                relevant = ", ".join(action["relevant_to"]) or "Unspecified / 未指定"
+                lines += [f"  For / 相关人员: {relevant}; {commitment}",
+                          f"  Decision-maker / 决策人: {maker}"]
+                if action["deadline"]:
+                    lines.append(f"  Deadline / 截止日期: {action['deadline']}")
+                if action["state"] != "open":
+                    lines.append("  " + {"resolved": "Resolved / 已解决", "superseded": "Superseded / 已被替代"}[action["state"]])
+            elif category in {"decision", "blocker", "next"}:
+                lines.append("  Responsibility and commitment unspecified / 责任与承诺未明确")
+            states = {"local": "Local only / 仅本地", "draft": "Draft / 草稿", "attempted": "Delivery unverified / 交付未核实", "verified": "Delivery verified / 交付已核实", "not_applicable": "Not applicable / 不适用"}
+            if row["delivery"]["state"] != "not_applicable":
+                lines.append("  " + states[row["delivery"]["state"]])
+            lines.append(f"  Uncertainty / 不确定性: {row['uncertainty']}")
             if row.get("carry_forward"):
                 lines.append(f"  Carried from / 延续自: {row['event_date']}")
-            if row.get("share_url"):
+            if row.get("share_url") and row["delivery"]["state"] == "verified":
                 lines.append("  " + row["share_url"])
     if not result["results"]:
-        lines.append("No team-ready outcomes established; this does not mean no work occurred. / 未确认可报告的结果，不表示没有工作。")
-    if result["corrections"]:
-        lines.append(f"\n{len(result['corrections'])} earlier claim(s) explicitly superseded / 先前陈述已被明确更正。")
-    lines += ["", "Declared sources only; privacy and translation require review. / 仅涵盖已声明来源；须审核隐私和翻译。", "No sending, schedule activation or business approval is implied. / 不代表发送、启用日程或业务批准。", ""]
-    return "\n".join(lines)
+        lines += ["", "No team-ready outcomes established; this does not mean no work occurred. / 未确认可报告的结果，不表示没有工作。"]
+    lines += ["", "Coverage / 来源范围"]
+    for owner in result["coverage"]:
+        if owner["sources"] is None:
+            lines.append(f"- {owner['owner']}: contribution unavailable / 未收到贡献；不表示没有工作。")
+        else:
+            gaps = [s for s in owner["sources"] if s["status"] == "unavailable"]
+            if gaps:
+                lines.append(f"- {owner['owner']}: unavailable / 不可用: " + "; ".join(f"{s['en']} / {s['zh']}" for s in gaps))
+    lines.append("Scoped reviewed evidence only / 仅限已审核的指定证据。")
+    return "\n".join(lines) + "\n"
+
+
+def shared_brief(result, through_cutoff=None):
+    """Reviewed projection only: never copy source maps or private evidence."""
+    if through_cutoff is not None:
+        stamp(through_cutoff)
+    return {"schema": "team-brief-v1", "project": result["project"], "date": result["date"],
+            "timezone": result["timezone"], "through_cutoff": through_cutoff,
+            "evidence_sha256": digest(result), "coverage": deepcopy(result["coverage"]),
+            "items": [{"outcome_id": g["outcome_id"], "artifact_id": g["artifact_id"], "status": g["status"],
+                       "variants": [deepcopy(v["outcome"]) for v in g["variants"]]} for g in result["results"]]}
+
+
+def reentry(brief, receipt, current, owner, at):
+    """Readback declarations are supplied by the agent, not authenticated here.
+
+    A current owning-record review is digest-bound to each returned variant.
+    Missing, stale or invalid evidence is a nonblocking coverage gap.
+    """
+    empty = {"items": [], "limitation": "Team evidence unavailable or stale; continue personal orientation."}
+    try:
+        if brief["schema"] != "team-brief-v1" or brief["project"] != "grace-gems" or brief["through_cutoff"] is None:
+            return empty
+        now = stamp(at)
+        observed = stamp(receipt["observed_at"])
+        checked = stamp(current["observed_at"])
+        cutoff = stamp(brief["through_cutoff"])
+        if not (cutoff <= observed <= now and cutoff <= checked <= now):
+            return empty
+        if (now-observed).total_seconds() > 86400 or (now-checked).total_seconds() > 86400:
+            return empty
+        if receipt["brief_sha256"] != digest(brief) or current["brief_sha256"] != digest(brief) or receipt["latest_verified"] is not True:
+            return empty
+        rows = []
+        for item in brief["items"]:
+            selected = []
+            for row in item["variants"]:
+                action = row.get("action")
+                if not action:
+                    continue
+                validate_action(action)
+                if owner not in action["relevant_to"] or action["state"] != "open" or row["category"] not in {"decision", "blocker", "next"}:
+                    continue
+                status = current["items"].get(digest(row))
+                if status == "open":
+                    selected.append(deepcopy(row))
+            if selected:
+                # Preserve all variants of a relevant disagreement, without assigning them to the reader.
+                rows.append(deepcopy(item) if item["status"] == "unresolved" else {**deepcopy(item), "variants": selected})
+        return {"items": rows, "limitation": "Only explicitly relevant, currently reviewed actions; unknown ownership is not assigned."}
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return empty
 
 
 def private_folder(output, repo_root):
@@ -297,6 +402,7 @@ def main(argv=None):
     parser.add_argument("--source-map", type=Path)
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--through-cutoff", help="Actual timezone-aware inspected-source cutoff; omit if unknown")
     args = parser.parse_args(argv)
     try:
         packets = [json.loads(p.read_text(encoding="utf-8")) for p in args.input]
@@ -310,7 +416,8 @@ def main(argv=None):
             files = {"current-contribution.json": encoded(packet)}
         else:
             result = compose(packets, business_date=args.date, timezone=args.timezone, project=args.project, expected_owners=args.expected_owner)
-            files = {"current-team-email.md": render(result).encode("utf-8"), "current-evidence.json": encoded(result)}
+            files = {"current-team-email.md": render(result).encode("utf-8"), "current-evidence.json": encoded(result),
+                     "current-team-brief.json": encoded(shared_brief(result, args.through_cutoff))}
         folder = write_files(args.output, files, args.repo_root)
         print(f"Verified local {args.mode}: {folder}; nothing sent.")
         return 0

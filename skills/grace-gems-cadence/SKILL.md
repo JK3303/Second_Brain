@@ -14,8 +14,15 @@ schema, export/compose commands and activation boundaries.
 ## Re-entry: preserve the current project boundary
 
 For an explicit Grace Gems orientation request, inspect the relevant current
-Artistic Director handoff and project boundary, then state what changed, what is
-held and the smallest useful next move. Do not claim this repository already has
+Artistic Director handoff and project boundary, then state what changed and what is
+held, followed by three substantive A/B/C choices under
+[the shared contract](team-coffee-contract.md). A is Recommended; B and C are
+meaningfully different useful directions. Use tools/team_reentry.py with fresh
+private readback and owning-record captures for relevant unresolved team items.
+Missing shared evidence never blocks orientation. A letter selects its full
+visible bounded action; combined selections retain all scopes. Finish selected
+work before another menu. If three useful choices cannot be grounded, state the
+gap and ask one consequential question. Never infer new external authority. Do not claim this repository already has
 Hannah's Coffee command or replace its existing brain-sync skill.
 
 Client facts, source packets and email drafts belong only on an explicitly
