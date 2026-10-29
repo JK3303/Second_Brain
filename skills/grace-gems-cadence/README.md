@@ -102,13 +102,13 @@ supported. A local Markdown file is not a Gmail draft, upload or sent message.
 Type this command after the agent has prepared and reviewed the private input:
 
 ```sh
-python3 skills/grace-gems-cadence/tools/grace_gems_daily.py export --input /private/selection.json --source-map /private/source-map.json --date YYYY-MM-DD --timezone AREA/CITY --project grace-gems --repo-root /absolute/repository --output /private/jon-contribution
+python3 skills/grace-gems-cadence/tools/grace_gems_daily.py export --input /private/selection.json --source-map /private/source-map.json --date YYYY-MM-DD --timezone America/Denver --project grace-gems --repo-root /absolute/repository --output /private/jon-contribution
 ```
 
 Only the designated coordinator uses compose:
 
 ```sh
-python3 skills/grace-gems-cadence/tools/grace_gems_daily.py compose --input /private/mira/current-contribution.json --input /private/hannah/current-contribution.json --input /private/jon/current-contribution.json --date YYYY-MM-DD --timezone AREA/CITY --project grace-gems --expected-owner mira --expected-owner hannah --expected-owner jon --repo-root /absolute/repository --output /private/team-draft
+python3 skills/grace-gems-cadence/tools/grace_gems_daily.py compose --input /private/mira/current-contribution.json --input /private/hannah/current-contribution.json --input /private/jon/current-contribution.json --date YYYY-MM-DD --timezone America/Denver --project grace-gems --expected-owner mira --expected-owner hannah --expected-owner jon --repo-root /absolute/repository --output /private/team-draft
 ```
 
 Omit unavailable input files while keeping their expected owners. Export writes
@@ -121,7 +121,7 @@ the same portable contract in every owner adapter.
 
 ## Portable contract
 
-`scripts/team_contributions.py` is the standalone implementation shared with the
+`skills/grace-gems-cadence/tools/team_contributions.py` is the standalone implementation shared with the
 client adapters. `team-contribution-v1` contains `owner`, `project`, `date`,
 `timezone`, `audience: grace-gems-team`, `basis`, `coverage`, `sources`, `outcomes`
 and `review`. Unknown fields are rejected rather than copied into an export.
@@ -169,7 +169,7 @@ skills/grace-gems-cadence/tests/test_grace_gems_daily.py` using an external temp
 
 Installation or merge is not personal adoption, business approval, source access,
 routine collection, a schedule or sending authority. After explicit adoption,
-the owner chooses a business timezone/cutoff and source scope. One coordinator
+the owner confirms source scope; exchange uses America/Denver, with closes before 06:00 assigned to the preceding business date. Personal Journal calendars stay unchanged. One coordinator
 may be scheduled only when separately authorized; no automatic schedule is
 created here. Keep this prompt scoped to contribution export for each owner.
 
@@ -180,3 +180,9 @@ duplicate send. Use existing correspondence preservation. Do not change access
 or mailing-list membership. The scripts contain no retrieval or sending API.
 Tests establish the exchange/compiler behavior, not real-world time savings,
 autonomous source selection, semantic judgment, translation quality or adoption.
+
+## Explicit Dream delivery adapter
+
+This proposal provides reviewed contribution export, team-brief re-entry, and an agent-run delivery step after an explicitly invoked Dream. Merging makes the implementation available; it does not establish participant adoption, installation, Drive access, or successful delivery. Once the participant adopts and configures it, the active agent delivers only that participant’s reviewed Grace Gems contribution and verifies the shared copy. Mira alone composes and sends the combined team email. Unattended autodream and personal memory synchronization are unchanged.
+
+Follow [the participant delivery contract](team-participant-delivery.md). Run `skills/grace-gems-cadence/tools/team_delivery.py` for status, prepare, check-upload and record-upload. Completion is agent-observed and evidence-supported, not machine attestation. Actual host installation, adoption, source authority, private storage and verified Drive access remain prerequisites. The local export `current-contribution.json` maps only to `jon-current-contribution.json` in the bound exchange folder. First delivery requires a zero-match bootstrap or an existing exact match, then metadata and downloaded-byte verification. Local export, verified upload, shared brief and sent email are separate states. Synthetic validation does not establish host readiness or observed usefulness.

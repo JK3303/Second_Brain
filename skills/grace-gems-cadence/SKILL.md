@@ -33,7 +33,7 @@ records to accepted lessons, global memory, .claude memory or Open Brain.
 
 ## Close: contribute without another reporting queue
 
-1. Recover the explicit business day, IANA timezone, project and current request.
+1. Recover the explicit project request and use the shared America/Denver exchange date; before 06:00 belongs to the preceding business date. Personal calendars stay unchanged.
    Inspect only relevant authorized session/repository/email/Drive evidence;
    record unavailable sources rather than implying complete coverage.
 2. Reconcile repeated work, corrections and delivery in existing owning records
@@ -63,3 +63,7 @@ This proposal activates none of them. Reuse existing exact permission; obtain
 only a genuinely missing boundary. Before any future authorized send retry,
 reconcile provider IDs/history to avoid duplicates. Never write global memory,
 create a parallel reporting queue or replace existing correspondence ownership.
+
+## Agent-owned final step after adopted explicit Dream
+
+After the existing personal close has successfully completed, follow [participant delivery](team-participant-delivery.md) using `skills/grace-gems-cadence/tools/team_delivery.py`. Record actual invocation/session evidence and completion time; a local adapter record ID is not a host-native run ID. Do not rerun reflection or treat a memory write as completion. Require recorded adoption, allowed sources, actual host, designated private storage and fresh verified Drive access. Missing completion evidence permits local export only. Use the available Drive connector and verify its readback before recording delivery. Never attach this step to unattended autodream or change Open Brain synchronization. At Coffee, fetch the latest verified brief and current owning-record states before the existing re-entry helper; Hannah receives items through her packet only.
