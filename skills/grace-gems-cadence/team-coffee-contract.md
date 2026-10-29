@@ -98,8 +98,10 @@ Mira and Jon use the same read-only helper during their existing re-entry.
 
 ## Adoption and delivery limits
 
-Merge is not personal adoption. Participant delivery activation and late-arrival
-handling remain separate unresolved work. Preserve existing delivery authority,
+Merge is not personal adoption. Participant readiness and activation remain
+unverified. Follow the [late-arrival policy](team-participant-delivery.md#late-arrivals-receive-once-reconsider-at-the-next-ordinary-close):
+preserve reserved/sent briefs and reconsider relevant unresolved work at the next
+ordinary Dream, with original dates and renewed review. Preserve existing delivery authority,
 stable Drive identities, audience review and duplicate-send protections. No new
 schedule, recipient, permission, automatic GitHub publication or memory writer.
 
