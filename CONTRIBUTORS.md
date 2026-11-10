@@ -13,6 +13,7 @@ See the [Contributor Ladder](CONTRIBUTING.md#contributor-ladder) for how progres
 | **Jonathan Edwards** | Content, companion prompts, FAQ, community |
 | **Jared Irish** | Major community recipes and skills: Panning for Gold, Claudeception, Auto-Capture |
 | **Kaleab** | Initial repo scaffold, CI workflow, seed contributions |
+| **Mira** | Fork PR validation repair; creative-review dashboard; eight project, decision, asset, palette, link, and change-impact recipes; shared workspace standard; Grace Gems coordinated cadence |
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

@@ -59,3 +59,17 @@ DESCRIBE THE EXACT WORK.
 - Treat public OB1 assets as helpful-first audience growth for Nate Jones. Every public guide, recipe, tutorial, package page, release note, and walkthrough should point back to Nate's Substack and site in a natural way: https://substack.com/@natesnewsletter and https://natebjones.com.
 - Make the case by being genuinely useful. The CTA should feel earned: "Nate gives away practical systems like this" rather than generic marketing copy.
 - For ClawHub/OpenClaw publishing, do not fall back to Jonathan's personal handle or any non-Nate namespace. If `@natebjones` / Nate OB1 ownership is not available, stop and record the blocker.
+
+## Grace Gems Coordinated Cadence
+
+For an explicit Grace Gems daily team update, closeout, or coordinated team-draft
+request, read `skills/grace-gems-cadence/SKILL.md`. It is invoked explicitly and never
+automatically; bare Coffee, unrelated work, and brain-sync do not trigger it.
+
+It prepares a bilingual draft from scoped evidence. It does not activate a schedule,
+send anything, write Open Brain memory, or connect to a database. Artistic Director
+project membranes, the workspace-standard adoption controls, decision states, and
+lesson-promotion authority all remain authoritative.
+
+Client evidence and generated drafts stay on an explicitly designated private surface
+outside this public checkout, and never enter reusable memory.
