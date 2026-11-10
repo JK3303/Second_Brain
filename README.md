@@ -130,6 +130,14 @@ Standalone capabilities that make your Open Brain smarter.
 | [OpenClaw Agent Memory for OB1](recipes/openclaw-agent-memory/) | Canonical recipe for using OB1 Agent Memory as the governed continuity layer for OpenClaw workflows | OB1 Team |
 | [OpenClaw Code Review Memory](recipes/openclaw-code-review-memory/) | Flagship workflow for compounding repo-specific review lessons, maintainer corrections, and false positives | OB1 Team |
 | [OpenClaw TaskFlow Work Log](recipes/openclaw-taskflow-work-log/) | Durable handoff recipe for long-running OpenClaw TaskFlows across agents, models, and channels | OB1 Team |
+| [Reviewed Project Packet](recipes/project-packet/) | Export explicitly selected project text with a review digest bound to content, recipient, and purpose | [@mira-builds](https://github.com/mira-builds) |
+| [Asset Record Preflight](recipes/asset-preflight/) | Find missing assets, changed bytes, attribution gaps, and unresolved usage records before a creative handoff | [@mira-builds](https://github.com/mira-builds) |
+| [Project Resume](recipes/project-resume/) | Build a source-linked resumption packet from an existing project manifest, handoff, questions, and holds | [@mira-builds](https://github.com/mira-builds) |
+| [Decision Receipt Validation](recipes/decision-receipts/) | Check Markdown decision receipts for completeness, duplicate IDs, missing hold context, and broken supersession chains | [@mira-builds](https://github.com/mira-builds) |
+| [Project Lesson Context](recipes/lesson-context/) | Retrieve scoped creative lessons, rejected approaches, and unresolved questions from existing project Markdown | [@mira-builds](https://github.com/mira-builds) |
+| [Brand Palette to CSS](recipes/brand-palette/) | Compile explicitly chosen color tokens into CSS and check declared text and UI contrast pairs | [@mira-builds](https://github.com/mira-builds) |
+| [Local Markdown Link Check](recipes/local-link-check/) | Check bounded project Markdown file references with source ranges and explicit coverage limits | [@mira-builds](https://github.com/mira-builds) |
+| [Project Change Impact](recipes/change-impact/) | Trace changed source files through human-declared decisions and deliverables with explained review paths | [@mira-builds](https://github.com/mira-builds) |
 
 ### [`/skills`](skills/) — Agent Skills
 
@@ -148,6 +156,7 @@ Plain-text skill packs you can drop into Claude Code, Codex, or other AI clients
 | [Work Operating Model Skill Pack](skills/work-operating-model/) | Runs a five-layer elicitation interview and saves the approved operating model into Open Brain | [@jonathanedwards](https://github.com/jonathanedwards) |
 | [World Model Readiness Diagnostic](skills/world-model-diagnostic/) | Runs a 20-minute world-model diagnostic that maps paradigm fit, audits the boundary layer, and labels findings by confidence | [@jonathanedwards](https://github.com/jonathanedwards) |
 | [OpenClaw Agent Memory Skill Pack](skills/openclaw-agent-memory/) | Teaches OpenClaw agents to recall, write back, report usage, and respect OB1 provenance/use-policy rules | OB1 Team |
+| [Grace Gems Coordinated Cadence](skills/grace-gems-cadence/) | Turns reviewed owner contributions into one source-bound bilingual team draft, with no memory writes or sending | [@mira-builds](https://github.com/mira-builds) |
 
 ### [`/dashboards`](dashboards/) — Frontend Templates
 
@@ -157,6 +166,7 @@ Host on Vercel or Netlify, pointed at your Supabase backend. Two community-built
 | --------- | ------------ | ----------- |
 | [Open Brain Dashboard](dashboards/open-brain-dashboard/) | SvelteKit dashboard with MCP proxy and Supabase auth | [@headcrest](https://github.com/headcrest) |
 | [Open Brain Dashboard (Next.js)](dashboards/open-brain-dashboard-next/) | Full-featured Next.js dashboard — 8 pages, dark theme, smart ingest, quality auditing | [@alanshurafa](https://github.com/alanshurafa) |
+| [Creative Review Workbench](dashboards/creative-review/) | Compare creative directions, preserve exact human critique across rounds, and inspect revisions locally | [@mira-builds](https://github.com/mira-builds) |
 
 ### [`/integrations`](integrations/) — New Connections
 

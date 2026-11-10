@@ -17,6 +17,14 @@ Step-by-step builds that add a new capability to your Open Brain. Follow the ins
 | [NBJ OB1 Agent Memory for OpenClaw](openclaw-agent-memory/) | Canonical recipe for using OB1 Agent Memory as the governed continuity layer for OpenClaw workflows |
 | [OpenClaw Code Review Memory](openclaw-code-review-memory/) | Flagship workflow for compounding repo-specific review lessons, maintainer corrections, and false positives |
 | [OpenClaw TaskFlow Work Log](openclaw-taskflow-work-log/) | Durable handoff recipe for long-running OpenClaw TaskFlows across agents, models, and channels |
+| [Reviewed Project Packet](project-packet/) | Export explicitly selected project text with a review digest bound to content, recipient, and purpose |
+| [Asset Record Preflight](asset-preflight/) | Find missing assets, changed bytes, attribution gaps, and unresolved usage records before a creative handoff |
+| [Project Resume](project-resume/) | Build a source-linked resumption packet from an existing project manifest, handoff, questions, and holds |
+| [Decision Receipt Validation](decision-receipts/) | Check Markdown decision receipts for completeness, duplicate IDs, missing hold context, and broken supersession chains |
+| [Project Lesson Context](lesson-context/) | Retrieve scoped creative lessons, rejected approaches, and unresolved questions from existing project Markdown |
+| [Brand Palette to CSS](brand-palette/) | Compile explicitly chosen color tokens into CSS and check declared text and UI contrast pairs |
+| [Local Markdown Link Check](local-link-check/) | Check bounded project Markdown file references with source ranges and explicit coverage limits |
+| [Project Change Impact](change-impact/) | Trace changed source files through human-declared decisions and deliverables with explained review paths |
 
 Agent Memory recipes should be paired with
 [Safe Agent Memory and Provenance](../docs/safe-agent-memory-provenance.md)
