@@ -56,4 +56,4 @@ decision touched it.
 
 | Record | Subject | Status |
 |--------|---------|--------|
-| [`workspace-standard-0-2-0.md`](workspace-standard-0-2-0.md) | Shared workspace standard 0.2.0 | review-ready |
+| [`workspace-standard-0-2-0.md`](workspace-standard-0-2-0.md) | Shared workspace standard 0.2.0 | approved 2026-10-14 |
