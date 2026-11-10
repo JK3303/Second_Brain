@@ -1,0 +1,28 @@
+{
+  "name": "Grace Gems coordinated cadence",
+  "description": "Reviewed owner contributions for one source-bound bilingual team draft, without memory writes or sending.",
+  "category": "skills",
+  "author": {
+    "name": "Mira",
+    "github": "mira-builds"
+  },
+  "version": "1.0.0",
+  "requires": {
+    "open_brain": true,
+    "services": [],
+    "tools": [
+      "Python 3.11+",
+      "IANA timezone data",
+      "pytest (tests only)"
+    ]
+  },
+  "tags": [
+    "team-work",
+    "cadence",
+    "drafting"
+  ],
+  "difficulty": "intermediate",
+  "estimated_time": "20 minutes",
+  "created": "2026-10-28",
+  "updated": "2026-10-28"
+}
