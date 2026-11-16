@@ -1,0 +1,2 @@
+SKILL.md -text whitespace=cr-at-eol
+references/*.md -text whitespace=cr-at-eol

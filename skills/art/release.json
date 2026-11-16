@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "release": "coordinated-art-1.3.0",
+  "package_version": "1.3.0",
+  "source_revision": "c8d45ec0ba9f629ee9b9c6ea58c6a04a3e007a16",
+  "source_status": "landed",
+  "entrypoint": "skills/art/SKILL.md",
+  "files": [
+    {
+      "path": "skills/art/references/critique.md",
+      "sha256": "4adc68040755b39889c4801bb97d8f9f784df187676a74f9325a60e7f11b44f9",
+      "bytes": 4036
+    },
+    {
+      "path": "skills/art/references/fidelity.md",
+      "sha256": "7ffd9583f8cad61ab0ffa1a5b4daee81fc193f87165196bfc869cb890bd6dae9",
+      "bytes": 1647
+    },
+    {
+      "path": "skills/art/references/production.md",
+      "sha256": "a19e060932ab9afd8c114e4ce51d6cce0fc9a78f86aecb03121b57128dce3529",
+      "bytes": 1917
+    },
+    {
+      "path": "skills/art/references/review-cases.md",
+      "sha256": "2a2f12a24ce16e4af5986122a94d0448ef2e66b816bcfb8c92ca1b4656feab85",
+      "bytes": 4059
+    },
+    {
+      "path": "skills/art/references/series.md",
+      "sha256": "b32c6f8093c9608562776041757e3716493f406f977d09d3926c4b85e82fe040",
+      "bytes": 1132
+    },
+    {
+      "path": "skills/art/SKILL.md",
+      "sha256": "1e8c7f5a350e28f16649b5c63333ee2d2dadb99e7bb8908aaf36259a099895dc",
+      "bytes": 3708
+    }
+  ],
+  "validation": {
+    "shared_file_parity": "passed",
+    "live_demonstrations": "pending"
+  }
+}
