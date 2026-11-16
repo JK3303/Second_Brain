@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "capability_version": "1.0.0",
+  "adapter": "private-document",
+  "source": {
+    "revision": "4492cccd7ff00ddde00f374799ef0fc948b72c58",
+    "status": "landed-core-commit"
+  },
+  "shared_files": {
+    "tools/intent.py": "501c3092afcb3f605261e79e6dcaedf6838cb35556be4bf4e06487b6e1601bc9",
+    "tools/intent_lifecycle.py": "7c376255328b7bd09be3e2f88cac66c3f85382dc14195fff9cd7ebc1a55d81b6",
+    "tests/test_intent_conformance.py": "c45a61e85245216a92f879ec23b8cb295e914daf01f478ba8e3306a667572a95",
+    "docs/intent-capability.md": "1b4af917661e983b746cd7846c26a84eecc72ebf2851ac14c4360d0c9d9176e0"
+  },
+  "verification": {
+    "suite": "tests/test_intent_conformance.py",
+    "status": "conformance-passed",
+    "platform": "Windows",
+    "limits": "38 fictional portable lifecycle cases on Windows; no owner adoption, private-state migration, hosted run or live Open Brain trial"
+  },
+  "adoption": "not-inferred",
+  "package": {
+    "version": "1.0.1",
+    "source_pr_head": "e3589b874dd81b4404b0238d3d078946c9871577",
+    "entrypoint": "SKILL.md",
+    "layout": "self-contained skills/intent",
+    "state_binding": "package directory; no automatic migration from the earlier repository-root adapter"
+  }
+}
