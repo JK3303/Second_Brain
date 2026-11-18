@@ -4,11 +4,49 @@
 
 <h1 align="center">Second_Brain</h1>
 
+**Current repository version: [v1.0](VERSION).** See the [version history](docs/version-history.md) for the November 17, 2026 baseline. Component and workspace-standard versions remain separate.
+
+For work that crosses repositories, use the [shared handoff pattern](docs/version-history.md#using-versions-in-shared-work)
+to keep the current source, open decisions, and next action clear.
+
+This milestone recognizes an external project pull request and fulfillment of the assigned historical backfill work, confirmed by the operator on November 17, 2026.
+
 A personal AI second-brain system for projects, memories, skills, and experiments. Built on the [Open Brain](https://github.com/NateBJones-Projects/OB1) infrastructure — one database (Supabase + pgvector), one MCP protocol, any AI client.
 
 This repo is the working home for creative projects, AI-assisted workflows, and personal knowledge tools. It inherits the Open Brain extension ecosystem and adds project-specific work on top.
 
 > Originally forked from [Open Brain](https://github.com/NateBJones-Projects/OB1) by [Nate B. Jones](https://natesnewsletter.substack.com/). The upstream community, extensions, and learning path remain available there.
+
+## Start here
+
+Begin with the project you want to advance. Open its current entry point and
+identify the task, the person who will review it, and what a useful result
+would look like.
+
+Use the project's existing decisions and handoff to recover context. Reusable
+methods and blank templates can help you prepare the work; accepted feedback
+can inform the next iteration.
+
+### Example: prepare a contribution
+
+> Help me prepare my next project contribution. Recover the assignment and
+> accepted decisions, identify missing information, and prepare a reviewable
+> change with a short explanation of how we checked it.
+
+The assistant summarizes the assignment from available sources, separates
+confirmed requirements from open questions, and prepares the requested
+candidate. You inspect the result and decide what to revise. When you authorize
+publication, the contribution can proceed through a PR for the receiving
+project's review. This example describes intended use, not a completed trial.
+
+### Information boundaries
+
+This repository is public. Private client records, customer information, and
+assignment evidence belong in their designated private workspace. Only reviewed,
+appropriately sanitized material should enter a public contribution. A
+project-specific lesson becomes reusable guidance through separate review.
+A draft, successful check, or open PR does not establish approval, delivery,
+or acceptance.
 
 ## Projects
 
