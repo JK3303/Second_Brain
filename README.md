@@ -6,6 +6,9 @@
 
 **Current repository version: [v1.0](VERSION).** See the [version history](docs/version-history.md) for the November 17, 2026 baseline. Component and workspace-standard versions remain separate.
 
+For work that crosses repositories, use the [shared handoff pattern](docs/version-history.md#using-versions-in-shared-work)
+to keep the current source, open decisions, and next action clear.
+
 This milestone recognizes an external project pull request and fulfillment of the assigned historical backfill work, confirmed by the operator on November 17, 2026.
 
 A personal AI second-brain system for projects, memories, skills, and experiments. Built on the [Open Brain](https://github.com/NateBJones-Projects/OB1) infrastructure — one database (Supabase + pgvector), one MCP protocol, any AI client.
